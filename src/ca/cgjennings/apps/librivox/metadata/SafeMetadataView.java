@@ -24,48 +24,48 @@ public class SafeMetadataView implements MetadataView {
 		v = toWrap;
 	}
 
-	private static String _( String s ) {
+	private static String S( String s ) {
 		return s == null ? "" : s;
 	}
 
 	@Override
 	public String getAlbum() {
-		return _( v.getAlbum() );
+		return S( v.getAlbum() );
 	}
 
 	@Override
 	public String getArtist() {
-		return _( v.getArtist() );
+		return S( v.getArtist() );
 	}
 
 	@Override
 	public String getComment() {
-		return _( v.getComment() );
+		return S( v.getComment() );
 	}
 
 	@Override
 	public String getGenre() {
-		return _( v.getGenre() );
+		return S( v.getGenre() );
 	}
 
 	@Override
 	public String getMetadataFormat() {
-		return _( v.getMetadataFormat() );
+		return S( v.getMetadataFormat() );
 	}
 
 	@Override
 	public String getTitle() {
-		return _( v.getTitle() );
+		return S( v.getTitle() );
 	}
 
 	@Override
 	public String getTrack() {
-		return _( v.getTrack() );
+		return S( v.getTrack() );
 	}
 
 	@Override
 	public String getYear() {
-		return _( v.getYear() );
+		return S( v.getYear() );
 	}
 
 	@Override
