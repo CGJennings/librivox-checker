@@ -1,7 +1,6 @@
 package ca.cgjennings.apps.librivox;
 
 import ca.cgjennings.apps.librivox.LibriVoxAudioFile.Status;
-import ca.cgjennings.compatibility.JTableLayer;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -152,7 +151,7 @@ class FileTableModel extends AbstractTableModel {
 		@Override
 		public Component getTableCellRendererComponent( JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column ) {
 			super.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
-			row = JTableLayer.convertRowIndexToModel( table, row );
+			row = table.convertRowIndexToModel( row );
 
 			if( regular == null ) {
 				regular = getFont().deriveFont( Font.BOLD );

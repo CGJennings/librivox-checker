@@ -7,7 +7,6 @@ import ca.cgjennings.apps.librivox.tools.ID3Editor;
 import ca.cgjennings.apps.librivox.tools.ID3UpgradeTool;
 import ca.cgjennings.apps.librivox.validators.AbstractValidator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
-import ca.cgjennings.compatibility.JTableLayer;
 import ca.cgjennings.io.StreamCopier;
 import ca.cgjennings.platform.OSXAdapter;
 import ca.cgjennings.platform.PlatformSupport;
@@ -105,8 +104,8 @@ public class Checker extends javax.swing.JFrame {
 
 		AbstractValidator.setUserStrictnessSuffix( AbstractValidator.USER_STRICTNESS_GENTLE );
 
-		// create row sorter under Java 6+ and init column sizes
-		JTableLayer.setAutoCreateRowSorter( fileTable, true );
+		// create row sorter and init column sizes
+        fileTable.setAutoCreateRowSorter( true );
 
 		initFileChooser();
 		initDropTarget();
@@ -126,7 +125,7 @@ public class Checker extends javax.swing.JFrame {
 				int sel = fileTable.getSelectedRow();
 //				int sel = fileTable.getSelectionModel().getLeadSelectionIndex();
 				if( sel >= 0 ) {
-					sel = convertRowIndexToModel( sel );
+					sel = fileTable.convertRowIndexToModel( sel );
 				}
 				updateReportViews( sel );
 			}
@@ -228,14 +227,14 @@ public class Checker extends javax.swing.JFrame {
 			rows = new int[]{ rowShownInReportViews };
 		} else {
 			for( int i = 0; i < rows.length; ++i ) {
-				rows[i] = convertRowIndexToModel( rows[i] );
+				rows[i] = fileTable.convertRowIndexToModel( rows[i] );
 			}
 		}
 		return rows;
 	}
 
 	public int getActiveRow() {
-		return convertRowIndexToModel( fileTable.getSelectedRow() );
+		return fileTable.convertRowIndexToModel( fileTable.getSelectedRow() );
 	}
 
 	public LibriVoxAudioFile[] getSelectedFiles() {
@@ -661,7 +660,7 @@ private void checkFiles(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
 		if( modelRow < 0 ) {
 			return;
 		}
-		int viewRow = convertRowIndexToView( modelRow );
+		int viewRow = fileTable.convertRowIndexToView( modelRow );
 		fileTable.scrollRectToVisible( fileTable.getCellRect( viewRow, 0, true ) );
 	}
 
@@ -707,7 +706,7 @@ private void saveCopyItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 		return;
 	}
 
-	File fromFile = model.getRow( convertRowIndexToModel( sel ) ).getLocalFile();
+	File fromFile = model.getRow( fileTable.convertRowIndexToModel( sel ) ).getLocalFile();
 	File toFile = null;
 
 	while( toFile == null ) {
@@ -757,7 +756,7 @@ private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void fileTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileTableMouseClicked
 	if( evt.getClickCount() >= 2 && evt.getButton() == MouseEvent.BUTTON1 ) {
 		Point p = evt.getPoint();
-		int row = convertRowIndexToModel( fileTable.rowAtPoint( p ) );
+		int row = fileTable.convertRowIndexToModel( fileTable.rowAtPoint( p ) );
 //		int col = fileTable.convertColumnIndexToModel( fileTable.columnAtPoint( p ) );
 		if( row >= 0 && row < model.getRowCount() /* && col == FileTableModel.COL_FILE */ ) {
 			LibriVoxAudioFile file = model.getRow( row );
@@ -1237,32 +1236,6 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 		if( settings != null ) {
 			settings.writeToLocalStorage( Checker.class );
 		}
-	}
-
-	/**
-	 * This method is used to simplify Java 5 compatibility. Under Java 5, or if
-	 * no row sorter is set on the table, it should always return
-	 * <code>row</code>. Under Java 6, it should delegate to
-	 * <code>fileTable</code> if a row sorter is set on the table.
-	 *
-	 * @param row the row in the view
-	 * @return the equivalent row in the model
-	 */
-	private int convertRowIndexToModel( int row ) {
-		return JTableLayer.convertRowIndexToModel( fileTable, row );
-	}
-
-	/**
-	 * This method is used to simplify Java 5 compatibility. Under Java 5, or if
-	 * no row sorter is set on the table, it should always return
-	 * <code>row</code>. Under Java 6, it should delegate to
-	 * <code>fileTable</code> if a row sorter is set on the table.
-	 *
-	 * @param row the row in the view
-	 * @return the equivalent row in the model
-	 */
-	private int convertRowIndexToView( int row ) {
-		return JTableLayer.convertRowIndexToView( fileTable, row );
 	}
 
 	/**
