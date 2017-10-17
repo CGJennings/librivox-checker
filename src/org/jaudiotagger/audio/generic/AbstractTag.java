@@ -27,7 +27,7 @@ import org.jaudiotagger.tag.*;
  * {@link org.jaudiotagger.tag.Tag} and introduces some more useful
  * functionality to be implemented.<br>
  *
- * @author Raphaël Slinckx
+ * @author RaphaÃ«l Slinckx
  */
 public abstract class AbstractTag implements Tag
 {

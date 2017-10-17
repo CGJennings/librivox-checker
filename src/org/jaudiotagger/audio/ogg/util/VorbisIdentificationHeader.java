@@ -1,6 +1,6 @@
 /*
  * Entagged Audio Tag library
- * Copyright (c) 2003-2005 Rapha�l Slinckx <raphael@slinckx.net>
+ * Copyright (c) 2003-2005 Raphaël Slinckx <raphael@slinckx.net>
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -46,7 +46,7 @@ import java.util.logging.Logger;
  * $Id: VorbisIdentificationHeader.java,v 1.5 2007/11/27 17:03:32 paultaylor Exp $
  *
  * @author Raphael Slinckx (KiKiDonK)
- * @version 16 d�cembre 2003
+ * @version 16 dï¿½cembre 2003
  */
 public class VorbisIdentificationHeader implements VorbisHeader
 {

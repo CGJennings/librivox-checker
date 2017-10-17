@@ -1,6 +1,6 @@
 /*
  * Entagged Audio Tag library
- * Copyright (c) 2003-2005 Raphaël Slinckx <raphael@slinckx.net>
+ * Copyright (c) 2003-2005 RaphaÃ«l Slinckx <raphael@slinckx.net>
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,7 @@ import org.jaudiotagger.tag.TagField;
  * with human readable text.<br>
  * A TagTextField does not store binary data.
  * 
- * @author Raphaël Slinckx
+ * @author RaphaÃ«l Slinckx
  */
 public interface TagTextField extends TagField {
 

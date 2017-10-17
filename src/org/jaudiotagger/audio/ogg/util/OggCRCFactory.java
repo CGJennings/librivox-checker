@@ -1,6 +1,6 @@
 /*
  * Entagged Audio Tag library
- * Copyright (c) 2003-2005 Rapha�l Slinckx <raphael@slinckx.net>
+ * Copyright (c) 2003-2005 Raphaël Slinckx <raphael@slinckx.net>
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * $Id: OggCRCFactory.java,v 1.4 2007/08/15 12:39:58 paultaylor Exp $
  *
  * @author Raphael Slinckx (KiKiDonK)
- * @version 19 d�cembre 2003
+ * @version 19 dï¿½cembre 2003
  */
 public class OggCRCFactory
 {
