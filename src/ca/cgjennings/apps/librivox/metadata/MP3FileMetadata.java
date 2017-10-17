@@ -5,7 +5,6 @@ import ca.cgjennings.apps.librivox.Checker;
 import ca.cgjennings.apps.librivox.decoder.DecoderFactory;
 import ca.cgjennings.apps.librivox.decoder.NotAnMP3Exception;
 import ca.cgjennings.apps.librivox.decoder.StreamDecoder;
-import ca.cgjennings.compatibility.FileLayer;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -162,7 +161,7 @@ public class MP3FileMetadata {
 		// if it is not read/write we try to make it read/write here
 		// if that fails, an exception will be thrown later by the tag library
 		if( !f.canWrite() ) {
-			FileLayer.setWritable( f, true );
+            f.setWritable( true );
 		}
 
 		MP3File mp3f = null;
