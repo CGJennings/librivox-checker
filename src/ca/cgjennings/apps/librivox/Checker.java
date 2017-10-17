@@ -9,7 +9,6 @@ import ca.cgjennings.apps.librivox.validators.AbstractValidator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.compatibility.DesktopLayer;
 import ca.cgjennings.compatibility.JTableLayer;
-import ca.cgjennings.compatibility.WindowFrameLayer;
 import ca.cgjennings.io.StreamCopier;
 import ca.cgjennings.platform.OSXAdapter;
 import ca.cgjennings.platform.PlatformSupport;
@@ -192,7 +191,7 @@ public class Checker extends javax.swing.JFrame {
 		for( int i = 0; i < infoTab.getTabCount(); ++i ) {
 			infoTab.setBackgroundAt( i, Color.WHITE );
 		}
-		
+
 		if( !isAlwaysOnTopSupported() ) {
 			onTopSeparator.setVisible( false );
 			onTopItem.setVisible( false );
@@ -1378,7 +1377,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 				}
 			}
 		}
-		WindowFrameLayer.setIconImages( this, icons );
+		setIconImages( icons );
 	}
 
 	/**
@@ -1510,7 +1509,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 		int tabIndex = Math.min( Math.max( 0, s.getInt( PREF_SELECTED_TAB, 0 ) ), infoTab.getTabCount()-1 );
 		infoTab.setSelectedIndex( tabIndex );
-		
+
 		// if negative, value from GUI editor layout is used
 		int splitpos = s.getInt( PREF_SPLITTER, -1 );
 		if( splitpos > fileInfoSplitter.getHeight() ) {
