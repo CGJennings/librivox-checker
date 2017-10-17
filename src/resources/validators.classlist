@@ -1,0 +1,38 @@
+# This file contains a list of names of classes that are derived from
+# Validator. You can add new validators to the tool by including
+# their class names here; there is no need to modify LibriVoxAudioFile.
+#
+# For each class name, a code is provided that determines how that
+# validator's results will be treated:
+#
+#   REQUIRED      A file that fails this validator's tests will not pass
+#                 validation. Use this if a validator performs one or
+#                 more tests that would likely need to be corrected
+#                 before the file can be accepted.
+#
+#   OPTIONAL      The validator will not produce results worse than a
+#                 warning, even if a test is failed. (The validator cannot
+#                 prevent a file from "passing" validation.)
+#
+#   IGNORE        This validator will not be used to validate files.
+#
+# If a class name does not include a package name, the package
+# ca.cgjennings.apps.librivox.validators will be used implicitly.
+#
+# Note: each validator class has its own setting file
+# (resources/CLASSNAME.properties). That file will usually provide finer
+# control over a validator's behaviour. In most cases, each individual test
+# performed by a vaidator will have its own entry in that file so that it
+# can be made REQUIRED or OPTIONAL. In such cases, the individual rule is
+# applied first, then the class-level rule. Results can be downgraded, but
+# not upgraded. If an test's indiviudal rule turns a failure into a warning,
+# then it cannot be made a failure by the class setting. Likewise, a class
+# setting of OPTIONAL will turn all failures from the affected validator
+# into warnings, regardless of individual rules.
+#
+
+FileValidator: REQUIRED
+HeaderValidator: REQUIRED
+AmplitudeValidator: REQUIRED
+NoiseValidator: REQUIRED
+MetadataValidator: REQUIRED

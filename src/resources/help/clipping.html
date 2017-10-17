@@ -1,0 +1,43 @@
+<!--
+    Document   : clipping
+    Created on : 10-Apr-2012, 8:05:00 PM
+    Author     : Chris
+-->
+<html>
+  <head>
+    <title>Clipping</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <h1>Clipping</h1>
+	  Clipping is a kind of audio distortion. It can occur if your
+	  recording input level is too high, or if you amplify the audio
+	  too much in your editing software.
+
+	  <p>In your computer, audio is represented using a sequence of numbers.
+	  Each number represents the amplitude of the audio's sound wave for
+	  a tiny moment in time. Each of these numbers has a limited range
+	  of values. Clipping occurs when the wave's amplitude (height) is too large
+	  to fit in this limited range of numbers. If you look at a
+	  <a href="waveform.html">picture of the waveform</a>,
+	  clipping appears as straight lines along the top
+	  or bottom of the graph. The clipped parts of the audio sound distorted
+	  because the information about the shape of the sound wave that falls
+	  outside of the available number range is missing.
+
+	  <p style="text-align: center"><img src="clipping.png">
+
+	  <p><i>Checker</i> tests for clipping by looking for these straight lines
+	  in the shape of the waveform. It reports how much of the audio appears
+	  to be clipped on the <b>Information</b> tab. If the amount of clipping
+	  exceeds a certain threshold, it will be listed as an issue in the validation
+	  report. If the clipping was introduced while you were editing the file,
+	  you may be able to go back to an older version of the file, if you have
+	  one available. If the clipping occurred during recording, the only way to
+	  fix it is to do the recording over.
+
+	  <p><b>More Information:</b> <a href="http://wiki.librivox.org/index.php/Setting_Recording_Input_Level">LibriVox Wiki: Setting Recording Input Level</a>
+
+      <p><a href="index.html">Contents</a>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+body
+    { font-family: sans-serif; background-color: #ffffff; color: #000000; font-size: 11pt }
+
+h1
+    { font-size: 13pt; font-weight: bold; }
+
+h2
+    { font-size: 11pt; font-weight: bold; }
+    
+th
+    { background-color: #bcdcff; text-align: left; font-weight: bold; font-size: 14pt; }
+
+tr.odd
+    { background-color: #f2f2f2 }
+
+tr
+    { background-color: #f9f9f9 }
+
+span.reflective
+    { font-weight: bold; font-style: normal; font-size: 14pt; }
+
+a:link
+    { color: #0B0FAE; text-decoration: underline; }
+a:visited
+    { color: #0B0FAE; text-decoration: underline; } 
+a:hover
+    { color: #0B0FAE; background-color: #99CCFF; text-decoration: underline; }
+a:active 
+    { color: #99CCFF; background-color: #0B0FAE; text-decoration: underline; }
+    

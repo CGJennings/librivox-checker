@@ -1,0 +1,78 @@
+<!--
+    Document   : files
+    Created on : 10-Apr-2012, 8:05:00 PM
+    Author     : Chris
+-->
+<html>
+  <head>
+    <title>Working with Files</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <h1>Working with Files</h1>
+	  Using <i>Checker</i> consists of giving it MP3 files to check, waiting
+	  for it to check them, and then interpreting the results.
+	  This page describes the first of these steps: adding files to check and
+	  managing the files that you have added.
+	  <h1>The File Table</h1>
+	  The <i>Checker</i> window is divided into two sections: the top section of the
+	  window contains the table of files to be checked. The bottom part will
+	  show the report for an individual file. There is a small bar across the
+	  window between the two sections that you can drag up or down to change the
+	  relative size of the two sections.
+
+	  <p>The file table lists each file you've added in one column, and the
+	  status of the file in another column. If you add a lot of files at once,
+	  some of them will display <b>Waiting to Start</b>. These files are queued
+	  up to be checked, and will get their turn once some of the other files
+	  finish. Files that are currently being checked will display <b>Checking...</b>
+	  and a progress bar that shows how far along they are. When the bar fills up,
+	  the file is done and the status will change to summarize the result of the
+	  test: either <b>Passed</b>, <b>Passed with Warnings</b>, <b>Failed</b>,
+	  or (if something went wrong) <b>Error</b>.</p>
+
+	  <p>To select a file, click anywhere on its row in the file table. When you
+	  select a file, its report will appear in the report section below the file
+	  table (if it is ready). Most of the commands available from the
+	  <i>Checker</i> menu can be applied to a group of files all at once.
+	  You can select a group of files by clicking the
+	  first file in the group, holding <b>Shift</b>, and then clicking the last
+	  file in the group. Alternatively, holding down <b>Ctrl</b> and clicking
+	  on a file will add or remove it from the selection.
+
+	  <h1>Adding Files to the File Table</h1>
+	  There are a few ways to add new files to be checked. The easiest is often
+	  to simply drag the files from their folder to the <i>Checker</i> window
+	  and drop them. When you drag files over the window, the file table will
+	  be outlined in blue to show that it will accept them.
+
+	  <p>You can also add files by choosing the <b>File|Check Files</b>
+	  menu item and selecting the files you wish to add. If the files are online,
+	  you can choose <b>File|Check URLs</b> and enter the URL (Web address)
+	  instead. When you use this option, the file will first be downloaded to
+	  a temporary space on your computer. When you close <i>Checker</i>, these
+	  temporary download files will be deleted. However, if you wish you can
+	  keep a copy by selecting the desired file in the file
+	  table and choosing <b>File|Save a Copy</b>.
+
+	  <p>In addition to adding MP3 files directly, you can also drop ZIP archives
+	  containing MP3s onto <i>Checker</i>. The MP3 files will be extracted to
+	  temporary files (similar to the URL option above) and then checked.
+
+	  <h1>Removing Files from the File Table</h1>
+	  To remove one or more files from the file table, select them and then choose
+	  the <b>Edit|Remove Files</b> menu item. You can remove a file at any time,
+	  even if it is still being checked. To remove all files at once, choose
+	  the <b>Edit|Remove All Files</b> menu item. If you are checking a large batch
+	  of files and you are only interested in the ones that might have problems,
+	  choosing <b>Edit|Remove Passed Files</b> will remove all the files that
+	  have been checked and passed the testing process.
+
+	  <h1>Playing a File</h1>
+	  Double-clicking on a file in the file table will open it using your computer's
+	  default program for opening MP3 files, which is usually your media player
+	  application. (This feature may not work on some platforms.)
+
+	  <p><a href="index.html">Contents</a>
+  </body>
+</html>

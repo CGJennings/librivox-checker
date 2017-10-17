@@ -1,0 +1,80 @@
+<!--
+    Document   : id3_editor
+    Created on : 27-Apr-2012, 9:34:00 AM
+    Author     : Chris
+-->
+<html>
+  <head>
+    <title>ID3 Tag Editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <h1>ID3 Tag Editor</h1>
+	  <i>Checker</i> can edit ID3 tags. There are a lot of good fully
+	  fledged tag editing applications available, so <i>Checker</i>
+	  doesn't try to replace them. It just provides the basics you need to
+	  create and fix tags for <i>LibriVox</i> files on the spot.
+
+	  <p>To edit ID3 tags, choose the file or files you wish to edit in the
+	  file table and then choose the <b>Tools|Batch Edit ID3 Tags</b> menu
+	  item. The editor window will open. This will display the most common ID3
+	  fields (artist, title, album, track, year, genre, comments, and cover
+	  art). Edit the fields and choose <b>Update</b> to modify the
+	  selected file(s).
+
+	  <p><b>Note:</b> The editor will modify <i>all the selected files</i>
+	  in the file table. To help you remember this and avoid mistakes,
+	  the <b>Update</b> button will show the number of files that will be
+	  affected in brackets.
+
+	  <h1>Limiting the Scope of Changes</h1>
+	  When you are working on a batch of files, you usually only want to edit
+	  a subset of the available fields. To control whether a field will be changed,
+	  look for the check box to the field's left. If it is checked, then that field
+	  will be updated when you save your changes. If it is unchecked, then it
+	  will keep the value it had before. To emphasize this, unchecked fields
+	  will be greyed out and you will not be able to edit them.
+
+      <p>To change several check boxes quickly, you can click on
+	  either the <b>Check All</b> or <b>Uncheck All</b> buttons along the
+	  right edge of the window:
+
+	  <p style="text-align: center"><img src="../checkall.png">&nbsp;&nbsp;&nbsp;&nbsp;<img src="../uncheckall.png">
+
+	  <p>To save time, when you edit multiple files the title, track,
+	  and comment fields will start out unchecked. If you open only one file,
+	  everything starts out checked.
+
+	  <h1>Adding and Removing Cover Art</h1>
+	  Editing the cover art of the selected files is a breeze. If you want to
+	  add or change the cover art, drag an image file (JPEG or PNG) from
+	  a folder and drop it on the picture frame. It may take <i>Checker</i>
+	  a couple of seconds to read in the file, but in a moment a thumbnail
+	  of the new art will appear in the frame. To delete the existing cover
+	  art, click on the small trash can icon next to the picture frame:
+
+	  <p style="text-align: center"><img src="../delete.png">
+
+	  <h1>Autofill</h1>
+	  The only fields you need to fill in before uploading are the title,
+	  artist, and album. However, <i>Checker</i> can also fill in
+	  the year, track, and genre automatically as a convenience.
+	  To turn this on, choose the <b>Autofill</b> button. (If you don't
+	  fill the track and genre in, they will be added automatically
+	  later on at <i>LibriVox</i>.)
+
+	  <p>Note that when this option is on, the
+	  displayed track number will be the track number of the active row
+	  in the file table, but rest assured that every selected file will get its
+	  own track number. The track number will be extracted from the title
+	  field text, or from the file name if the title doesn't start with a number.
+
+	  <h1>ID3 Version</h1>
+	  The editor can save edited tags as either ID3 v2.3 or ID3 v2.4 using the
+	  dropdown menu in the bottom-left corner. If you don't change this,
+	  the tags will be saved as ID3 v2.3, which is the most widely supported
+	  version.
+
+      <p><a href="index.html">Contents</a>
+  </body>
+</html>

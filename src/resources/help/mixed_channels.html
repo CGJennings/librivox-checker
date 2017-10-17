@@ -1,0 +1,32 @@
+<!--
+    Document   : mixed_channels
+    Created on : 10-Apr-2012, 8:05:00 PM
+    Author     : Chris
+-->
+<html>
+  <head>
+    <title>Ambiguous Channel Layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <h1>Ambiguous Channel Layouts</h1>
+	  This warning appears when different parts of the audio file report
+	  that they use different channel arrangements. For example, if some
+	  parts are mono and some parts are stereo. MP3 files are made of
+	  lots of little tiny chunks of audio called frames. Each frame contains
+	  basic information about the audio format, such as the sampling
+	  frequency and type of channels to use. Generally speaking, a single
+	  file should use the same channel layout in every frame. (The exception
+	  is that different frames may switch freely between the "stereo"
+	  and "joint stereo" layouts.)
+
+	  <p>When a file contains different channel layouts for different frames,
+	  it may indicate that the file is corrupt or that it was created by
+	  concatenating several MP3 files together. In either case, it is usually
+	  something you will want to investigate. When <i>Checker</i> detects this
+	  situation, it will display a list of the different formats. For each
+	  format, it will also display the number of frames that used the format.
+
+      <p><a href="index.html">Contents</a>
+  </body>
+</html>

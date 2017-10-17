@@ -1,0 +1,73 @@
+<!--
+    Document   : background_noise
+    Created on : 28-Apr-2012, 2:14:00 PM
+    Author     : Chris
+-->
+<html>
+  <head>
+    <title>Background Noise</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <h1>Background Noise</h1>
+	  Recorded audio contains background noise. The "silent" parts of the
+	  recording are not really silent at all, but pick up all the sounds
+	  from the ambient environment, such as your fridge running in the
+	  next room, the hum of the electricity powering your recording device,
+	  and even the birds chirping outside the window. Typically, background
+	  noise is a persistent quiet hiss sound that can be heard throughout
+	  the recording. This kind of noise is what <i>Checker</i> will test for
+	  in your recording.
+
+	  <p><i>Checker</i> measures background noise by looking at the quietest
+	  part and measuring its volume. Since you should be leaving
+	  several seconds of silence at the end of your recording,
+	  <i>Checker</i> should be able to get a good sample of your
+	  background noise level.
+
+	  <p>If <i>Checker</i> finds that the background noise level is too high,
+	  it will suggest applying noise cleaning. Depending on how high the noise
+	  level is, this could either produce a warning or an error in your validation.
+	  Try cleaning the audio (see below) and then re-check the file.
+
+	  <h1>Reducing Background Noise</h1>
+	  To reduce background noise while recording, turn the recording level down
+	  on your recording device. (The recording level is how much the signal from
+	  your microphone is amplified during recording.) If you
+	  turn the gain down too much, then <a href="volume.html">your voice may be too quiet</a>,
+	  so you will need to find a happy medium.
+
+	  <p>After your recording is made, you can clean the remaining noise
+	  using your audio editing application. However, too much cleaning
+	  will add unpleasant artifacts to your recording. The best approach
+	  is to do the best job you can by adjusting the recording level or moving
+	  to a quieter part of the house, then clean up the little bit of noise
+	  that's left in your editing software.
+	  Good source recordings can generally
+	  be cleaned down to a noise level between 24-28 dB without distortion.
+	  That is more than clean enough for pleasant listening.
+	  (Keep in mind that <i>Checker</i> isn't a person; it isn't smart enough
+	  to know if your recording is starting to "sound weird" from too much cleaning.
+	  Always listen to some of the speech after cleaning to make
+	  sure it is still crisp and clear. If you don't like how it sounds, undo
+	  and try again with less aggressive settings.)
+
+	  <h1>Suspiciously Low Background Noise</h1>
+	  <i>Checker</i> will report if your background noise level is suspiciously
+	  low (zero or near zero). This may indicate that you have over-cleaned
+	  the noise from the recording. Alternatively, it may mean that you have
+	  inserted true silence into the recording by mistake (that is, a segment
+	  with a constant zero amplitude). Note that when the instructions on
+	  <i>LibriVox</i> ask you to leave 5 or 10 seconds of silence at the end
+	  of the recording, this means that you should continue recording after
+	  you have finished speaking. It does not mean that you should use an
+	  "insert silence" command in your audio editing software.
+
+	  <p><b>More Information:</b><br>
+		  <a href="http://wiki.librivox.org/index.php/Setting_Recording_Input_Level">LibriVox Wiki: Setting Recording Input Level</a><br>
+		  <a href="http://wiki.librivox.org/index.php/Noise_Cleaning">LibriVox Wiki: Noise Cleaning</a><br>
+		  <a href="http://wiki.librivox.org/index.php/Detailed_Audacity_Noise_Removal">LibriVox Wiki: Detailed Audacity Noise Removal</a>
+
+      <p><a href="index.html">Contents</a>
+  </body>
+</html>

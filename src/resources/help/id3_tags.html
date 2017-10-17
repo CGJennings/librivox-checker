@@ -1,0 +1,97 @@
+<!--
+    Document   : id3_tags
+    Created on : 27-Apr-2012, 4:28:00 AM
+    Author     : Chris
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ID3 Tags</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+	  <h1>ID3 Tags</h1>
+	  By itself, an MP3 file contains nothing but audio data. To allow your
+	  media player to display information like the title and artist for an
+	  MP3, extra information must be added to the file. This
+	  extra information is called <i>metadata</i>. <i>LibriVox</i> uses a
+	  particular method of adding metadata called an ID3 tag.
+
+	  <p><b>More Information:</b> <a href="http://wiki.librivox.org/index.php/What_is_ID3">LibriVox Wiki: What is ID3?</a>
+
+	  <h1>Adding or Editing an ID3 Tag</h1>
+	  Depending on your audio editing software, there is often an option to
+	  set the ID3 metadata when you save the audio as an MP3. Your operating
+	  system may also let you edit the metadata. In Windows,
+	  you can do this by right clicking on the file,
+	  choosing <b>Properties</b>, and then choosing the <b>Details</b> tab.
+	  In OS X, you can right click on the file in <i>iTunes</i> and choose
+	  <b>Get Info</b>.
+
+	  <p><b>More Information:</b> <a href="http://wiki.librivox.org/index.php/How_to_Add_or_Edit_ID3_Tags">LibriVox Wiki: How to Add or Edit ID3 Tags</a>
+
+	  <h1>Required Metadata</h1>
+	  For <i>LibriVox</i> files, you need to enter the Title, Album, and Artist fields
+	  of your file's ID3 tag. Typically, these will be a description of the
+	  section, the title of the book, and the book's author. The project
+	  page will tell you the exact values to use for each field. It is important
+	  to use these exactly as given so that the naming is consistent across
+	  sections. Just copy and
+	  paste the values for your section into the matching fields in your ID3
+	  tag editor.
+
+	  <p><b>Note:</b> The finished audio file will include more fields in the
+	  ID3 tag than just the three above. These are added automatically when
+	  the book is catalogued, so you don't need to worry about them.
+
+	  <p><b>Tip:</b> When copying the value for one of the fields
+	  from the project page, you may accidentally select a space before or
+	  after the field value. <i>Checker</i> can warn you if one of the fields
+	  contains leading or trailing spaces. (This may also indicate that you didn't
+	  select quite enough, and part of the text is missing.)
+
+	  <h1>ID3 Tag Versions (v1, v2, etc.)</h1>
+	  There are different versions of the ID3 tag format. Version 1 (ID3 v1)
+	  is considered obsolete. It supports only a few fields, and the number of
+	  characters that can appear in each field is very limited.
+	  Version 2 (ID3 v2) supports many more kinds of
+	  fields, and has effectively no limit on field size.
+	  Version 2 can also include cover art and other non-text
+	  information. Although LibriVox files don't need any of the extra fields
+	  in v2 files, they do benefit from the longer field lengths.
+
+	  <p>Within ID3 v2, there are a number of of revisions (v2.00, 2.10, and so
+	  on). Although all of these versions can hold similar kinds of information,
+	  the way that they store that information varies. Of these, it is better to use version
+	  v2.30 or v2.40, because these provide the best support for non-English
+	  characters. Of the two, v2.30 is currently the best choice overall because it
+	  is compatible with the widest range of software and players.
+
+	  <p><i>Checker</i> can convert existing ID3 tags to ID3 v2.30 for you.
+	  Select the files in question and choose <b>Tools|Convert ID3 Tags</b>.
+	  Ensure that the <b>Convert to ID3 v2.3</b> button is selected, and then
+	  click the <b>Convert</b> button.
+
+	  <h1>Having Both Tag Versions in One File</h1>
+	  It is possible to have both an ID3 v1 tag and an ID3 v2 tag in the same
+	  file. This is a good idea in principle, because it allows very old players
+	  that don't understand v2 tags to use the v1 tag instead. However, some
+	  tools have the bad habit of only using the v2 tag if the v1 tag is missing.
+	  Thus, when both tags are present, these tools use the <i>less</i> detailed tag.
+	  Since most media players support v2.30 tags, it is therefore best
+	  not to include a v1 tag in the file.
+
+	  <p><i>Checker</i> can remove existing ID3 v1 tags for you. When using the
+	  <b>Tools|Convert ID3 Tags</b> command, ensure that the option to remove
+	  obsolete tags is checked before converting.
+
+	  <h1>Viewing ID3 Tags in Checker</h1>
+	  <i>Checker</i> will list the contents of any ID3 tags in your files
+	  on the <b>Information</b> tab. For ID3 v2 tags, it only displays the most
+	  common kinds of fields. If there is a cover image or other
+	  artwork, this will be displayed as a thumbnail.
+	  Clicking on the thumbnail will show the full size version of the image.
+
+      <p><a href="index.html">Contents</a>
+	</body>
+</html>
