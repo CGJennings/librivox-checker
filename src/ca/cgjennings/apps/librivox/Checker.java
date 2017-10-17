@@ -7,7 +7,6 @@ import ca.cgjennings.apps.librivox.tools.ID3Editor;
 import ca.cgjennings.apps.librivox.tools.ID3UpgradeTool;
 import ca.cgjennings.apps.librivox.validators.AbstractValidator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
-import ca.cgjennings.compatibility.DesktopLayer;
 import ca.cgjennings.compatibility.JTableLayer;
 import ca.cgjennings.io.StreamCopier;
 import ca.cgjennings.platform.OSXAdapter;
@@ -17,6 +16,7 @@ import ca.cgjennings.util.Settings;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Point;
@@ -761,7 +761,11 @@ private void fileTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
 //		int col = fileTable.convertColumnIndexToModel( fileTable.columnAtPoint( p ) );
 		if( row >= 0 && row < model.getRowCount() /* && col == FileTableModel.COL_FILE */ ) {
 			LibriVoxAudioFile file = model.getRow( row );
-			DesktopLayer.getDesktop().open( file.getLocalFile().toURI() );
+            try {
+                Desktop.getDesktop().open( file.getLocalFile() );
+            } catch( Throwable t ) {
+                getLogger().warning( t.toString() );
+            }
 		}
 	}
 }//GEN-LAST:event_fileTableMouseClicked

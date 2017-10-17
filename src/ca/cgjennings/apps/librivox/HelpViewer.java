@@ -5,13 +5,12 @@ import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.InputStream;
-import ca.cgjennings.compatibility.DesktopLayer;
 import ca.cgjennings.ui.LinearHistory;
 import ca.cgjennings.util.Settings;
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
@@ -113,10 +112,10 @@ public class HelpViewer extends javax.swing.JDialog {
 
         viewScroll.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, java.awt.Color.gray));
 
-        view.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        view.setContentType("text/html");
         view.setEditable(false);
-        view.setFont(new java.awt.Font("SansSerif", 0, 12));
+        view.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        view.setContentType("text/html"); // NOI18N
+        view.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         view.addHyperlinkListener( new HyperlinkListener() {
             public void hyperlinkUpdate( HyperlinkEvent e ) {
                 if( e.getEventType() == HyperlinkEvent.EventType.ACTIVATED ) {
@@ -127,9 +126,9 @@ public class HelpViewer extends javax.swing.JDialog {
                             setPage( url );
                         } else {
                             try {
-                                DesktopLayer.getDesktop().browse( url.toURI() );
-                            } catch( URISyntaxException ex ) {
-                                Checker.getLogger().warning( "unexpected bad url syntax: " + url );
+                                Desktop.getDesktop().browse( url.toURI() );
+                            } catch( Throwable t ) {
+                                ca.cgjennings.apps.librivox.Checker.getLogger().warning( t.toString() );
                             }
                         }
                     }

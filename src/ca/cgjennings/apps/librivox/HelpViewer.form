@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.6" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
@@ -54,19 +54,19 @@
       <SubComponents>
         <Component class="javax.swing.JEditorPane" name="view">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="4" left="4" right="4" top="4"/>
               </Border>
             </Property>
-            <Property name="contentType" type="java.lang.String" value="text/html"/>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="contentType" type="java.lang.String" value="text/html" noResource="true"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="12" style="0"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="&#x9;&#x9;view.addHyperlinkListener( new HyperlinkListener() {&#xa;&#x9;&#x9;&#x9;public void hyperlinkUpdate( HyperlinkEvent e ) {&#xa;&#x9;&#x9;&#x9;&#x9;if( e.getEventType() == HyperlinkEvent.EventType.ACTIVATED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;URL url = e.getURL();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;if( url != null ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;String protocol = url.getProtocol();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if( protocol.equalsIgnoreCase( &quot;jar&quot; ) || protocol.equalsIgnoreCase( &quot;file&quot; ) ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setPage( url );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;DesktopLayer.getDesktop().browse( url.toURI() );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} catch( URISyntaxException ex ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ca.cgjennings.apps.librivox.Checker.getLogger().warning( &quot;unexpected bad url syntax: &quot; + url );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;} else if( e.getEventType() == HyperlinkEvent.EventType.ENTERED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;URL url = e.getURL();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;if( url != null ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;String protocol = url.getProtocol();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if( protocol.equalsIgnoreCase( &quot;jar&quot; ) || protocol.equalsIgnoreCase( &quot;file&quot; ) ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( null );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( url.toString() );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;} else if( e.getEventType() == HyperlinkEvent.EventType.EXITED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( null );&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="&#x9;&#x9;view.addHyperlinkListener( new HyperlinkListener() {&#xa;&#x9;&#x9;&#x9;public void hyperlinkUpdate( HyperlinkEvent e ) {&#xa;&#x9;&#x9;&#x9;&#x9;if( e.getEventType() == HyperlinkEvent.EventType.ACTIVATED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;URL url = e.getURL();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;if( url != null ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;String protocol = url.getProtocol();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if( protocol.equalsIgnoreCase( &quot;jar&quot; ) || protocol.equalsIgnoreCase( &quot;file&quot; ) ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setPage( url );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;try {&#xa;                                Desktop.getDesktop().browse( url.toURI() );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} catch( Throwable t ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ca.cgjennings.apps.librivox.Checker.getLogger().warning( t.toString() );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;} else if( e.getEventType() == HyperlinkEvent.EventType.ENTERED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;URL url = e.getURL();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;if( url != null ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;String protocol = url.getProtocol();&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if( protocol.equalsIgnoreCase( &quot;jar&quot; ) || protocol.equalsIgnoreCase( &quot;file&quot; ) ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( null );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;} else {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( url.toString() );&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;&#x9;} else if( e.getEventType() == HyperlinkEvent.EventType.EXITED ) {&#xa;&#x9;&#x9;&#x9;&#x9;&#x9;setURLLabel( null );&#xa;&#x9;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;&#x9;}&#xa;&#x9;&#x9;});"/>
           </AuxValues>
         </Component>
       </SubComponents>
