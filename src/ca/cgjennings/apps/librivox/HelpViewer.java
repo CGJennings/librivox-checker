@@ -64,12 +64,10 @@ public class HelpViewer extends javax.swing.JDialog {
             Checker.getLogger().log(Level.SEVERE, "missing help file", e);
         }
         try {
-            BufferedImage bi = ImageIO.read(v.getClass().getResource("/resources/splash.png"));
+            BufferedImage bi = ImageIO.read(v.getClass().getResource("/resources/about.png"));
             if (bi != null) {
-                bi = ImageUtils.resizeImage(bi, 0.5f);
                 v.aboutIcon.setIcon(new ImageIcon(bi));
                 v.aboutIcon.setVisible(true);
-                v.setSize(Math.max(parent.getWidth() * 8 / 10, bi.getWidth() + 96), parent.getHeight() * 8 / 10);
                 v.setLocationRelativeTo(parent);
             }
         } catch (Exception e) {
