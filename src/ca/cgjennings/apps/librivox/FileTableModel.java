@@ -173,14 +173,16 @@ class FileTableModel extends AbstractTableModel {
                 setText(state.getLocalizedName());
             }
 
-            if (state == LibriVoxAudioFile.Status.ERROR || state == LibriVoxAudioFile.Status.FAILED) {
-                setForeground(failColor);
-            } else if (state == LibriVoxAudioFile.Status.PASSED) {
-                setForeground(passColor);
-            } else if (state == LibriVoxAudioFile.Status.WARNINGS) {
-                setForeground(warnColor);
-            } else {
-                setForeground(Color.BLACK);
+            if(!isSelected) {
+                if (state == LibriVoxAudioFile.Status.ERROR || state == LibriVoxAudioFile.Status.FAILED) {
+                    setForeground(failColor);
+                } else if (state == LibriVoxAudioFile.Status.PASSED) {
+                    setForeground(passColor);
+                } else if (state == LibriVoxAudioFile.Status.WARNINGS) {
+                    setForeground(warnColor);
+                } else {
+                    setForeground(Color.BLACK);
+                }
             }
 
             if (progress < 0) {
@@ -228,23 +230,23 @@ class FileTableModel extends AbstractTableModel {
             super.paintComponent(g1);
         }
 
-        private final int MARGIN = 2;
-        private final int ARC_WIDTH = 8;
-        private final int ARC_HEIGHT = 8;
+        private static final int MARGIN = 2;
+        private static final int ARC_WIDTH = 8;
+        private static final int ARC_HEIGHT = 8;
         private float progress;
         private boolean isAnalysis;
         private LibriVoxAudioFile.Status state;
-        private Color gradient1 = Checker.getSettings().getColor("table-progress1", Color.BLUE);
-        private Color gradient2 = Checker.getSettings().getColor("table-progress2", Color.CYAN);
-        private Color dlGradient1 = Checker.getSettings().getColor("table-dl-progress1", Color.BLUE);
-        private Color dlGradient2 = Checker.getSettings().getColor("table-dl-progress2", Color.CYAN);
-        private Color outline = Checker.getSettings().getColor("table-progress-outline", Color.LIGHT_GRAY);
-        private Color passColor = Checker.getSettings().getColor("table-progress-pass", Color.GREEN);
-        private Color warnColor = Checker.getSettings().getColor("table-progress-warn", Color.YELLOW);
-        private Color failColor = Checker.getSettings().getColor("table-progress-fail", Color.RED);
+        private final Color gradient1 = Checker.getSettings().getColor("table-progress1", Color.BLUE);
+        private final Color gradient2 = Checker.getSettings().getColor("table-progress2", Color.CYAN);
+        private final Color dlGradient1 = Checker.getSettings().getColor("table-dl-progress1", Color.BLUE);
+        private final Color dlGradient2 = Checker.getSettings().getColor("table-dl-progress2", Color.CYAN);
+        private final Color outline = Checker.getSettings().getColor("table-progress-outline", Color.LIGHT_GRAY);
+        private final Color passColor = Checker.getSettings().getColor("table-progress-pass", Color.GREEN);
+        private final Color warnColor = Checker.getSettings().getColor("table-progress-warn", Color.YELLOW);
+        private final Color failColor = Checker.getSettings().getColor("table-progress-fail", Color.RED);
     }
 
-    private List<LibriVoxAudioFile> rows;
+    private final List<LibriVoxAudioFile> rows;
 
     public static final int COL_FILE = 0;
     public static final int COL_PROGRESS = 1;
