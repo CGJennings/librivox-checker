@@ -352,7 +352,6 @@ public class Checker extends javax.swing.JFrame {
         informationEditor.setEditable(false);
         informationEditor.setBorder(null);
         informationEditor.setContentType("text/html"); // NOI18N
-        informationEditor.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         informationScroll.setViewportView(informationEditor);
 
         infoTab.addTab(string("info-tab-information"), informationScroll); // NOI18N
