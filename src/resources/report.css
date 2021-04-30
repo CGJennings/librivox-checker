@@ -1,15 +1,24 @@
 body
-    { font-family: sans-serif; background-color: #ffffff; color: #000000; font-size: 11pt }
+    { font-size: 11px; font-family: sans-serif; background-color: #ffffff; color: #24292e }
 
 h1
-    { font-size: 13pt; font-weight: bold; }
+    { font-size: 18px; margin-top: 22px; margin-bottom: 4px; font-weight: bold; color: #24292e }
 
 h2
-    { font-size: 11pt; font-weight: bold; }
+    { font-size: 15px; margin-top: 4px; margin-bottom: 4px; font-weight: bold; color: #24292e }
+
+h3
+    { font-size: 11px; margin-top: 4px; margin-bottom: 4px; font-weight: bold; color: #24292e }
+
+p
+    { margin-top: 11px; margin-bottom: 0  }
+
+table
+    { border-collapse: collapse; border-spacing: 0 }
     
 th
-    { background-color: #bcdcff; text-align: left; font-weight: bold; font-size: 14pt; }
-
+    { font-size: 14px; text-align: left; font-weight: normal }
+   
 tr.odd
     { background-color: #f2f2f2 }
 
@@ -17,14 +26,19 @@ tr
     { background-color: #f9f9f9 }
 
 span.reflective
-    { font-weight: bold; font-style: normal; font-size: 14pt; }
+    { font-weight: bold; font-style: normal }
 
 a:link
-    { color: #0B0FAE; text-decoration: underline; }
+    { color: #0B0FAE; text-decoration: underline }
 a:visited
-    { color: #0B0FAE; text-decoration: underline; } 
+    { color: #0B0FAE; text-decoration: underline } 
 a:hover
-    { color: #0B0FAE; background-color: #99CCFF; text-decoration: underline; }
+    { color: #0B0FAE; background-color: #99CCFF; text-decoration: underline }
 a:active 
-    { color: #99CCFF; background-color: #0B0FAE; text-decoration: underline; }
+    { color: #99CCFF; background-color: #0B0FAE; text-decoration: underline }
     
+dt
+    { margin-top: 11px; }
+
+pre, tt, code
+    { font-family: monospace; font-size: 10px }

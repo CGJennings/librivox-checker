@@ -21,6 +21,8 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLDocument;
 import static ca.cgjennings.apps.librivox.Checker.string;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 /**
  * Dialog window that displays built-in help files and opens external links in
@@ -33,9 +35,20 @@ public class HelpViewer extends javax.swing.JDialog {
     private HelpViewer(java.awt.Frame parent) {
         super(parent, false);
         initComponents();
+        customizeStyleSheet();
+
         getRootPane().setDefaultButton(closeBtn);
         ((HTMLDocument) view.getDocument()).setAsynchronousLoadPriority(-1);
         setLocationRelativeTo(parent);
+    }
+
+    /**
+     * Customize the stylesheet for help files compared to reports.
+     */
+    private void customizeStyleSheet() {
+        final HTMLEditorKit kit = (HTMLEditorKit) view.getEditorKit();
+        final StyleSheet styles = kit.getStyleSheet();
+        styles.addRule("body { margin: 18px; }");
     }
 
     /**
@@ -51,12 +64,10 @@ public class HelpViewer extends javax.swing.JDialog {
             Checker.getLogger().log(Level.SEVERE, "missing help file", e);
         }
         try {
-            BufferedImage bi = ImageIO.read(v.getClass().getResource("/resources/splash.png"));
+            BufferedImage bi = ImageIO.read(v.getClass().getResource("/resources/about.png"));
             if (bi != null) {
-                bi = ImageUtils.resizeImage(bi, 0.5f);
                 v.aboutIcon.setIcon(new ImageIcon(bi));
                 v.aboutIcon.setVisible(true);
-                v.setSize(Math.max(parent.getWidth() * 8 / 10, bi.getWidth() + 96), parent.getHeight() * 8 / 10);
                 v.setLocationRelativeTo(parent);
             }
         } catch (Exception e) {
@@ -116,9 +127,8 @@ public class HelpViewer extends javax.swing.JDialog {
         viewScroll.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, java.awt.Color.gray));
 
         view.setEditable(false);
-        view.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        view.setBorder(null);
         view.setContentType("text/html"); // NOI18N
-        view.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         view.addHyperlinkListener( new HyperlinkListener() {
             public void hyperlinkUpdate( HyperlinkEvent e ) {
                 if( e.getEventType() == HyperlinkEvent.EventType.ACTIVATED ) {
