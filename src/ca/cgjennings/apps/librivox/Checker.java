@@ -80,7 +80,10 @@ import javax.swing.text.html.StyleSheet;
  * @author Christopher G. Jennings (cjennings@acm.org)
  */
 public class Checker extends javax.swing.JFrame {
-    /** Current version number. */
+
+    /**
+     * Current version number.
+     */
     public static final String VERSION = "1.0.97";
 
     /**
@@ -197,7 +200,6 @@ public class Checker extends javax.swing.JFrame {
             onTopSeparator.setVisible(false);
             onTopItem.setVisible(false);
         }
-
 
         setSize(getPreferredSize());
         loadPreferences();
@@ -1048,7 +1050,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex2) {
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex2) {
                 getLogger().log(Level.SEVERE, null, ex);
             }
         }
@@ -1332,22 +1334,22 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     private void initAppIcons() {
         final List<Image> icons = new LinkedList<Image>();
-        final String[] iconFiles = new String[] {
+        final String[] iconFiles = new String[]{
             "pass@4x", "pass@2x", "pass"
         };
 
-        for(String file : iconFiles) {
+        for (String file : iconFiles) {
             BufferedImage image = null;
             Throwable failReason = null;
             URL imageURL = getClass().getResource("/resources/" + file + ".png");
-            if(imageURL != null) {
+            if (imageURL != null) {
                 try {
                     image = ImageIO.read(imageURL);
-                } catch(IOException ex) {
+                } catch (IOException ex) {
                     failReason = ex;
                 }
             }
-            if(image == null) {
+            if (image == null) {
                 getLogger().log(Level.WARNING, "failed to read icon image", failReason);
             } else {
                 icons.add(image);

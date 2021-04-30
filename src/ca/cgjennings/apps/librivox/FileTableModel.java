@@ -173,7 +173,7 @@ class FileTableModel extends AbstractTableModel {
                 setText(state.getLocalizedName());
             }
 
-            if(!isSelected) {
+            if (!isSelected) {
                 if (state == LibriVoxAudioFile.Status.ERROR || state == LibriVoxAudioFile.Status.FAILED) {
                     setForeground(failColor);
                 } else if (state == LibriVoxAudioFile.Status.PASSED) {
