@@ -317,8 +317,6 @@ public class Checker extends javax.swing.JFrame {
 
         fileTable.setModel( model );
         fileTable.setGridColor(java.awt.Color.lightGray);
-        fileTable.setSelectionBackground( getSettings().getColor( "table-highlighter", null ) );
-        fileTable.setSelectionForeground(java.awt.Color.black);
         fileTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 fileTableMouseClicked(evt);
