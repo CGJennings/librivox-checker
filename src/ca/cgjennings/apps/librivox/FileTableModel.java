@@ -25,235 +25,239 @@ import static ca.cgjennings.apps.librivox.Checker.string;
  * @author Christopher G. Jennings (cjennings@acm.org)
  */
 class FileTableModel extends AbstractTableModel {
-	public FileTableModel() {
-		rows = new ArrayList<LibriVoxAudioFile>();
-	}
 
-	public int addAudioFile( LibriVoxAudioFile af ) {
-		int pos = rows.size();
-		addAudioFile( pos, af );
-		return pos;
-	}
+    public FileTableModel() {
+        rows = new ArrayList<LibriVoxAudioFile>();
+    }
 
-	public void addAudioFile( int index, LibriVoxAudioFile af ) {
-		assertEDT();
-		rows.add( af );
-		af.setOwner( this );
-		fireTableRowsInserted( index, index );
-	}
+    public int addAudioFile(LibriVoxAudioFile af) {
+        int pos = rows.size();
+        addAudioFile(pos, af);
+        return pos;
+    }
 
-	public void removeRow( int row ) {
-		LibriVoxAudioFile file = rows.get( row );
-		rows.remove( row );
-		fireTableRowsDeleted( row, row );
-		file.dispose();
-	}
+    public void addAudioFile(int index, LibriVoxAudioFile af) {
+        assertEDT();
+        rows.add(af);
+        af.setOwner(this);
+        fireTableRowsInserted(index, index);
+    }
 
-	public LibriVoxAudioFile getRow( int row ) {
-		return rows.get( row );
-	}
+    public void removeRow(int row) {
+        LibriVoxAudioFile file = rows.get(row);
+        rows.remove(row);
+        fireTableRowsDeleted(row, row);
+        file.dispose();
+    }
 
-	public int findRowForFile( LibriVoxAudioFile file ) {
-		for( int r=0; r < rows.size(); ++r ) {
-			if( rows.get( r ) == file ) {
-				fireTableRowsUpdated( r, r );
-				return r;
-			}
-		}
-		return -1;
-	}
+    public LibriVoxAudioFile getRow(int row) {
+        return rows.get(row);
+    }
 
-	@Override
-	public int getRowCount() {
-		return rows.size();
-	}
+    public int findRowForFile(LibriVoxAudioFile file) {
+        for (int r = 0; r < rows.size(); ++r) {
+            if (rows.get(r) == file) {
+                fireTableRowsUpdated(r, r);
+                return r;
+            }
+        }
+        return -1;
+    }
 
-	@Override
-	public int getColumnCount() {
-		return COL_COUNT;
-	}
+    @Override
+    public int getRowCount() {
+        return rows.size();
+    }
 
-	@Override
-	public Class<?> getColumnClass( int columnIndex ) {
-		return String.class;
-	}
+    @Override
+    public int getColumnCount() {
+        return COL_COUNT;
+    }
 
-	@Override
-	public String getColumnName( int column ) {
-		String key;
-		switch( column ) {
-			case COL_FILE:
-				key = "col-file";
-				break;
-			case COL_PROGRESS:
-				key = "col-progress";
-				break;
-			default:
-				throw new AssertionError( "unknown column" );
-		}
-		return string( key );
-	}
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return String.class;
+    }
 
-	@Override
-	public Object getValueAt( int row, int col ) {
-		LibriVoxAudioFile f = rows.get( row );
-		switch( col ) {
-			case COL_FILE:
-				return f.getFileName();
-			case COL_PROGRESS:
-				// although the renderer generates the text that is displayed to
-				// the user, we return a string that will allow the automatic
-				// row sorter to do its thing
-				String cell;
-				boolean busy = f.isBusy();
-				Status s = f.getStatus();
-				if( f.isBusy() ) {
-					cell = String.format( Locale.CANADA, "%s %06.0f", s.name(), f.getCurrentProgress()*100000f );
-				} else {
-					cell = s.name();
-				}
-				return cell;
-		}
-		throw new UnsupportedOperationException( "Not supported yet." );
-	}
+    @Override
+    public String getColumnName(int column) {
+        String key;
+        switch (column) {
+            case COL_FILE:
+                key = "col-file";
+                break;
+            case COL_PROGRESS:
+                key = "col-progress";
+                break;
+            default:
+                throw new AssertionError("unknown column");
+        }
+        return string(key);
+    }
 
-	/**
-	 * Called from an {@link LibriVoxAudioFile} when that file's progress or status
-	 * has changed.
-	 * @param source the {@link LibriVoxAudioFile} that has changed state
-	 */
-	void progressUpdate( LibriVoxAudioFile source ) {
-		assertEDT();
+    @Override
+    public Object getValueAt(int row, int col) {
+        LibriVoxAudioFile f = rows.get(row);
+        switch (col) {
+            case COL_FILE:
+                return f.getFileName();
+            case COL_PROGRESS:
+                // although the renderer generates the text that is displayed to
+                // the user, we return a string that will allow the automatic
+                // row sorter to do its thing
+                String cell;
+                boolean busy = f.isBusy();
+                Status s = f.getStatus();
+                if (f.isBusy()) {
+                    cell = String.format(Locale.CANADA, "%s %06.0f", s.name(), f.getCurrentProgress() * 100000f);
+                } else {
+                    cell = s.name();
+                }
+                return cell;
+        }
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		for( int r=0; r < rows.size(); ++r ) {
-			if( rows.get( r ) == source ) {
-				fireTableRowsUpdated( r, r );
-				return;
-			}
-		}
+    /**
+     * Called from an {@link LibriVoxAudioFile} when that file's progress or
+     * status has changed.
+     *
+     * @param source the {@link LibriVoxAudioFile} that has changed state
+     */
+    void progressUpdate(LibriVoxAudioFile source) {
+        assertEDT();
 
-		throw new AssertionError( "file not in table: " + source );
-	}
+        for (int r = 0; r < rows.size(); ++r) {
+            if (rows.get(r) == source) {
+                fireTableRowsUpdated(r, r);
+                return;
+            }
+        }
 
-	public ProgressRenderer getProgressRenderer() {
-		return sharedProgressRenderer;
-	}
-	private ProgressRenderer sharedProgressRenderer = new ProgressRenderer();
+        throw new AssertionError("file not in table: " + source);
+    }
 
-	public class ProgressRenderer extends DefaultTableCellRenderer {
-		Font regular, small;
+    public ProgressRenderer getProgressRenderer() {
+        return sharedProgressRenderer;
+    }
+    private ProgressRenderer sharedProgressRenderer = new ProgressRenderer();
 
-		public ProgressRenderer() {
-			setOpaque( false );
-			setHorizontalAlignment( JLabel.CENTER );
-		}
+    public class ProgressRenderer extends DefaultTableCellRenderer {
 
-		@Override
-		public Component getTableCellRendererComponent( JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column ) {
-			super.getTableCellRendererComponent( table, value, isSelected, hasFocus, row, column );
-			row = table.convertRowIndexToModel( row );
+        Font regular, small;
 
-			if( regular == null ) {
-				regular = getFont().deriveFont( Font.BOLD );
-				small = regular.deriveFont( Font.PLAIN, regular.getSize2D()-2f );
-			}
+        public ProgressRenderer() {
+            setOpaque(false);
+            setHorizontalAlignment(JLabel.CENTER);
+        }
 
-			LibriVoxAudioFile file = rows.get( row );
-			state = file.getStatus();
-			progress = file.getCurrentProgress();
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            row = table.convertRowIndexToModel(row);
 
-			// the status itself can provide the right text for the activity, but
-			// we treat "downloading" from a local jar file as a special case.
-			if( state == Status.DOWNLOADING && file.getSource().toExternalForm().startsWith( "jar:file" ) ) {
-				setText( string( "status-extracting" ) );
-			} else {
-				setText( state.getLocalizedName() );
-			}
+            if (regular == null) {
+                regular = getFont().deriveFont(Font.BOLD);
+                small = regular.deriveFont(Font.PLAIN, regular.getSize2D() - 2f);
+            }
 
-			if( state == LibriVoxAudioFile.Status.ERROR || state == LibriVoxAudioFile.Status.FAILED ) {
-				setForeground( failColor );
-			} else if( state == LibriVoxAudioFile.Status.PASSED ) {
-				setForeground( passColor );
-			} else if( state == LibriVoxAudioFile.Status.WARNINGS ) {
-				setForeground( warnColor );
-			} else {
-				setForeground( Color.BLACK );
-			}
+            LibriVoxAudioFile file = rows.get(row);
+            state = file.getStatus();
+            progress = file.getCurrentProgress();
 
-			if( progress < 0 ) {
-				setFont( regular );
-			} else {
-				setFont( small );
-			}
+            // the status itself can provide the right text for the activity, but
+            // we treat "downloading" from a local jar file as a special case.
+            if (state == Status.DOWNLOADING && file.getSource().toExternalForm().startsWith("jar:file")) {
+                setText(string("status-extracting"));
+            } else {
+                setText(state.getLocalizedName());
+            }
 
-			isAnalysis = state != LibriVoxAudioFile.Status.DOWNLOADING;
+            if (state == LibriVoxAudioFile.Status.ERROR || state == LibriVoxAudioFile.Status.FAILED) {
+                setForeground(failColor);
+            } else if (state == LibriVoxAudioFile.Status.PASSED) {
+                setForeground(passColor);
+            } else if (state == LibriVoxAudioFile.Status.WARNINGS) {
+                setForeground(warnColor);
+            } else {
+                setForeground(Color.BLACK);
+            }
 
-			return this;
-		}
+            if (progress < 0) {
+                setFont(regular);
+            } else {
+                setFont(small);
+            }
 
-		@Override
-		protected void paintComponent( Graphics g1 ) {
-			g1.setColor( getBackground() );
-			g1.fillRect( 0, 0, getWidth(), getHeight() );
+            isAnalysis = state != LibriVoxAudioFile.Status.DOWNLOADING;
 
-			if( progress >= 0 ) {
-				int x = MARGIN;
-				int y = MARGIN;
-				int w = getWidth() - MARGIN*2 - 1;
-				int h = getHeight() - MARGIN*2 - 1;
-				int p = Math.round( w * progress );
+            return this;
+        }
 
-				Graphics2D g = (Graphics2D) g1;
-				g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+        @Override
+        protected void paintComponent(Graphics g1) {
+            g1.setColor(getBackground());
+            g1.fillRect(0, 0, getWidth(), getHeight());
 
-				Color grad1, grad2;
-				if( isAnalysis ) {
-					grad1 = gradient1;
-					grad2 = gradient2;
-				} else {
-					grad1 = dlGradient1;
-					grad2 = dlGradient2;
-				}
+            if (progress >= 0) {
+                int x = MARGIN;
+                int y = MARGIN;
+                int w = getWidth() - MARGIN * 2 - 1;
+                int h = getHeight() - MARGIN * 2 - 1;
+                int p = Math.round(w * progress);
 
-				GradientPaint gp = new GradientPaint( x, y, grad1, x, (y+h) * 3/4, grad2, true );
-				g.setPaint( gp );
-				g.fillRoundRect( x, y, p, h, ARC_WIDTH, ARC_HEIGHT );
-				g.setPaint( outline );
-				g.drawRoundRect( x, y, w, h, ARC_WIDTH, ARC_HEIGHT );
-			}
+                Graphics2D g = (Graphics2D) g1;
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			super.paintComponent( g1 );
-		}
+                Color grad1, grad2;
+                if (isAnalysis) {
+                    grad1 = gradient1;
+                    grad2 = gradient2;
+                } else {
+                    grad1 = dlGradient1;
+                    grad2 = dlGradient2;
+                }
 
-		private final int MARGIN = 2;
-		private final int ARC_WIDTH = 8;
-		private final int ARC_HEIGHT = 8;
-		private float progress;
-		private boolean isAnalysis;
-		private LibriVoxAudioFile.Status state;
-		private Color gradient1 = Checker.getSettings().getColor( "table-progress1", Color.BLUE );
-		private Color gradient2 = Checker.getSettings().getColor( "table-progress2", Color.CYAN );
-		private Color dlGradient1 = Checker.getSettings().getColor( "table-dl-progress1", Color.BLUE );
-		private Color dlGradient2 = Checker.getSettings().getColor( "table-dl-progress2", Color.CYAN );
-		private Color outline = Checker.getSettings().getColor( "table-progress-outline", Color.LIGHT_GRAY );
-		private Color passColor = Checker.getSettings().getColor( "table-progress-pass", Color.GREEN );
-		private Color warnColor = Checker.getSettings().getColor( "table-progress-warn", Color.YELLOW );
-		private Color failColor = Checker.getSettings().getColor( "table-progress-fail", Color.RED );
-	}
+                GradientPaint gp = new GradientPaint(x, y, grad1, x, (y + h) * 3 / 4, grad2, true);
+                g.setPaint(gp);
+                g.fillRoundRect(x, y, p, h, ARC_WIDTH, ARC_HEIGHT);
+                g.setPaint(outline);
+                g.drawRoundRect(x, y, w, h, ARC_WIDTH, ARC_HEIGHT);
+            }
 
-	private List<LibriVoxAudioFile> rows;
+            super.paintComponent(g1);
+        }
 
-	public static final int COL_FILE = 0;
-	public static final int COL_PROGRESS = 1;
+        private final int MARGIN = 2;
+        private final int ARC_WIDTH = 8;
+        private final int ARC_HEIGHT = 8;
+        private float progress;
+        private boolean isAnalysis;
+        private LibriVoxAudioFile.Status state;
+        private Color gradient1 = Checker.getSettings().getColor("table-progress1", Color.BLUE);
+        private Color gradient2 = Checker.getSettings().getColor("table-progress2", Color.CYAN);
+        private Color dlGradient1 = Checker.getSettings().getColor("table-dl-progress1", Color.BLUE);
+        private Color dlGradient2 = Checker.getSettings().getColor("table-dl-progress2", Color.CYAN);
+        private Color outline = Checker.getSettings().getColor("table-progress-outline", Color.LIGHT_GRAY);
+        private Color passColor = Checker.getSettings().getColor("table-progress-pass", Color.GREEN);
+        private Color warnColor = Checker.getSettings().getColor("table-progress-warn", Color.YELLOW);
+        private Color failColor = Checker.getSettings().getColor("table-progress-fail", Color.RED);
+    }
 
-	public static final int COL_COUNT = 2;
+    private List<LibriVoxAudioFile> rows;
 
-	/**
-	 * Sprinkled here and there to verify that the LVF objects are obeying
-	 * threading assumptions.
-	 */
-	private void assertEDT() {
-		if( !EventQueue.isDispatchThread() )
-			throw new AssertionError( "called outside of EDT" );
-	}
+    public static final int COL_FILE = 0;
+    public static final int COL_PROGRESS = 1;
+
+    public static final int COL_COUNT = 2;
+
+    /**
+     * Sprinkled here and there to verify that the LVF objects are obeying
+     * threading assumptions.
+     */
+    private void assertEDT() {
+        if (!EventQueue.isDispatchThread()) {
+            throw new AssertionError("called outside of EDT");
+        }
+    }
 }

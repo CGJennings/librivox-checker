@@ -13,210 +13,214 @@ import javax.swing.border.AbstractBorder;
 
 /**
  * A border that creates an arc along two sides of the component.
+ *
  * @author Christopher G. Jennings (cjennings@acm.org)
  */
 public class ArcBorder extends AbstractBorder {
-	public static final int ARC_LEFT_TOP = 0;
-	public static final int ARC_TOP_RIGHT = 1;
-	public static final int ARC_RIGHT_BOTTOM = 2;
-	public static final int ARC_BOTTOM_LEFT = 3;
 
-	public ArcBorder() {
-	}
+    public static final int ARC_LEFT_TOP = 0;
+    public static final int ARC_TOP_RIGHT = 1;
+    public static final int ARC_RIGHT_BOTTOM = 2;
+    public static final int ARC_BOTTOM_LEFT = 3;
 
-	public ArcBorder( int arcEdges, Color color, int thickness ) {
-		this( arcEdges, color, 24, thickness, 0.2f );
-	}
+    public ArcBorder() {
+    }
 
-	public ArcBorder( int arcEdges, Color color, int arcSize, int thickness, float hardening ) {
-		setColor( color );
-		this.arcSize = arcSize;
-		this.thickness = thickness;
-		setHardening( hardening );
-		setArcEdges( arcEdges );
-	}
+    public ArcBorder(int arcEdges, Color color, int thickness) {
+        this(arcEdges, color, 24, thickness, 0.2f);
+    }
 
-	public int getArcEdges() {
-		return arcEdges;
-	}
+    public ArcBorder(int arcEdges, Color color, int arcSize, int thickness, float hardening) {
+        setColor(color);
+        this.arcSize = arcSize;
+        this.thickness = thickness;
+        setHardening(hardening);
+        setArcEdges(arcEdges);
+    }
 
-	public void setArcEdges( int arcEdges ) {
-		if( arcEdges < 0 || arcEdges > ARC_BOTTOM_LEFT ) {
-			throw new IllegalArgumentException( "invalid edge: " + arcEdges );
-		}
-		this.arcEdges = arcEdges;
-		arc = null;
-	}
+    public int getArcEdges() {
+        return arcEdges;
+    }
 
-	public int getArcSize() {
-		return arcSize;
-	}
+    public void setArcEdges(int arcEdges) {
+        if (arcEdges < 0 || arcEdges > ARC_BOTTOM_LEFT) {
+            throw new IllegalArgumentException("invalid edge: " + arcEdges);
+        }
+        this.arcEdges = arcEdges;
+        arc = null;
+    }
 
-	public void setArcSize( int arcSize ) {
-		this.arcSize = arcSize;
-		arc = null;
-	}
+    public int getArcSize() {
+        return arcSize;
+    }
 
-	public float getHardening() {
-		return hardening;
-	}
+    public void setArcSize(int arcSize) {
+        this.arcSize = arcSize;
+        arc = null;
+    }
 
-	public void setHardening( float hardening ) {
-		if( hardening < 0f || hardening > 1f ) {
-			throw new IllegalArgumentException( "hardening must be in range 0 to 1 inclusive" );
-		}
-		this.hardening = hardening;
-		arc = null;
-	}
+    public float getHardening() {
+        return hardening;
+    }
 
-	public int getThickness() {
-		return thickness;
-	}
+    public void setHardening(float hardening) {
+        if (hardening < 0f || hardening > 1f) {
+            throw new IllegalArgumentException("hardening must be in range 0 to 1 inclusive");
+        }
+        this.hardening = hardening;
+        arc = null;
+    }
 
-	public void setThickness( int thickness ) {
-		this.thickness = thickness;
-		arc = null;
-	}
+    public int getThickness() {
+        return thickness;
+    }
 
-	public Color getColor() {
-		return color;
-	}
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
+        arc = null;
+    }
 
-	public void setColor( Color color ) {
-		if( color == null ) {
-			throw new NullPointerException("color");
-		}
-		this.color = color;
-	}
+    public Color getColor() {
+        return color;
+    }
 
-	@Override
-	public Insets getBorderInsets( Component c ) {
-		return getBorderInsets( c, null );
-	}
+    public void setColor(Color color) {
+        if (color == null) {
+            throw new NullPointerException("color");
+        }
+        this.color = color;
+    }
 
-	@Override
-	public Insets getBorderInsets( Component c, Insets insets ) {
-		int t=0, l=0, r=0, b=0;
-		int i = arcSize/2;
-		switch( arcEdges ) {
-			case ARC_LEFT_TOP:
-			case ARC_BOTTOM_LEFT:
-				l = i;
-				break;
-			case ARC_TOP_RIGHT:
-			case ARC_RIGHT_BOTTOM:
-				r = i;
-				break;
-		}
-		if( insets == null ) {
-			insets = new Insets( t,l,b,r );
-		} else {
-			insets.set( t,l,b,r );
-		}
-		return insets;
-	}
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return getBorderInsets(c, null);
+    }
 
-	@Override
-	public void paintBorder( Component c, Graphics g1, int x, int y, int width, int height ) {
-		createShape( x, y, width, height );
-		Graphics2D g = (Graphics2D) g1;
-		g.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+    @Override
+    public Insets getBorderInsets(Component c, Insets insets) {
+        int t = 0, l = 0, r = 0, b = 0;
+        int i = arcSize / 2;
+        switch (arcEdges) {
+            case ARC_LEFT_TOP:
+            case ARC_BOTTOM_LEFT:
+                l = i;
+                break;
+            case ARC_TOP_RIGHT:
+            case ARC_RIGHT_BOTTOM:
+                r = i;
+                break;
+        }
+        if (insets == null) {
+            insets = new Insets(t, l, b, r);
+        } else {
+            insets.set(t, l, b, r);
+        }
+        return insets;
+    }
 
+    @Override
+    public void paintBorder(Component c, Graphics g1, int x, int y, int width, int height) {
+        createShape(x, y, width, height);
+        Graphics2D g = (Graphics2D) g1;
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		Container p = c.getParent();
-		if( p != null && !p.getBackground().equals( c.getBackground() ) ) {
-			g.setColor( p.getBackground() );
-			g.fill( exterior );
-		}
+        Container p = c.getParent();
+        if (p != null && !p.getBackground().equals(c.getBackground())) {
+            g.setColor(p.getBackground());
+            g.fill(exterior);
+        }
 
-		g.setStroke( pen );
+        g.setStroke(pen);
 
-		Color arcColor = color;
-		if( color == null ) {
-			arcColor = c.getBackground().darker();
-		}
-		g.setColor( arcColor );
-		g.draw( arc );
-	}
+        Color arcColor = color;
+        if (color == null) {
+            arcColor = c.getBackground().darker();
+        }
+        g.setColor(arcColor);
+        g.draw(arc);
+    }
 
-	private void createShape( int x1, int y1, int w, int h ) {
-		if( arc != null && cx == x1 && cy == y1 && cw == w && ch == h ) {
-			return;
-		}
-		cx = x1; cy = y1; cw = w; ch = h;
+    private void createShape(int x1, int y1, int w, int h) {
+        if (arc != null && cx == x1 && cy == y1 && cw == w && ch == h) {
+            return;
+        }
+        cx = x1;
+        cy = y1;
+        cw = w;
+        ch = h;
 
-		final int penOffset = thickness/2;
-		int x2 = x1+w, y2 = y1+h;
-		int fx1 = x1, fx2 = x2, fy1 = y1, fy2 = y2;
-		x1 += penOffset;
-		y1 += penOffset;
-		x2 -= penOffset + 1;
-		y2 -= penOffset + 1;
+        final int penOffset = thickness / 2;
+        int x2 = x1 + w, y2 = y1 + h;
+        int fx1 = x1, fx2 = x2, fy1 = y1, fy2 = y2;
+        x1 += penOffset;
+        y1 += penOffset;
+        x2 -= penOffset + 1;
+        y2 -= penOffset + 1;
 
-		final int hr = (int) (arcSize*hardening*0.5f + 0.5f);
+        final int hr = (int) (arcSize * hardening * 0.5f + 0.5f);
 
-		exterior = new GeneralPath();
-		arc = new GeneralPath();
-		switch( arcEdges ) {
-			case ARC_LEFT_TOP:
-				arc.moveTo( x1, y2 );
-				arc.lineTo( x1, y1 + arcSize );
-				arc.quadTo( x1+hr, y1+hr, x1 + arcSize, y1 );
-				arc.lineTo( x2, y1 );
+        exterior = new GeneralPath();
+        arc = new GeneralPath();
+        switch (arcEdges) {
+            case ARC_LEFT_TOP:
+                arc.moveTo(x1, y2);
+                arc.lineTo(x1, y1 + arcSize);
+                arc.quadTo(x1 + hr, y1 + hr, x1 + arcSize, y1);
+                arc.lineTo(x2, y1);
 
-				exterior.moveTo( fx1, fy1 + arcSize );
-				exterior.quadTo( fx1+hr, y1+hr, fx1 + arcSize, fy1 );
-				exterior.lineTo( fx1, fy1 );
-				exterior.closePath();
-				break;
+                exterior.moveTo(fx1, fy1 + arcSize);
+                exterior.quadTo(fx1 + hr, y1 + hr, fx1 + arcSize, fy1);
+                exterior.lineTo(fx1, fy1);
+                exterior.closePath();
+                break;
 
-			case ARC_TOP_RIGHT:
-				arc.moveTo( x1, y1 );
-				arc.lineTo( x2 - arcSize, y1 );
-				arc.quadTo( x2-hr, y1+hr, x2, y1 + arcSize );
-				arc.lineTo( x2, y2 );
+            case ARC_TOP_RIGHT:
+                arc.moveTo(x1, y1);
+                arc.lineTo(x2 - arcSize, y1);
+                arc.quadTo(x2 - hr, y1 + hr, x2, y1 + arcSize);
+                arc.lineTo(x2, y2);
 
-				exterior.moveTo( fx2 - arcSize, fy1 );
-				exterior.quadTo( fx2-hr, fy1+hr, fx2, fy1 + arcSize );
-				exterior.lineTo( fx2, fy1 );
-				exterior.closePath();
-				break;
+                exterior.moveTo(fx2 - arcSize, fy1);
+                exterior.quadTo(fx2 - hr, fy1 + hr, fx2, fy1 + arcSize);
+                exterior.lineTo(fx2, fy1);
+                exterior.closePath();
+                break;
 
-			case ARC_RIGHT_BOTTOM:
-				arc.moveTo( x2, y1 );
-				arc.lineTo( x2, y2 - arcSize );
-				arc.quadTo( x2-hr, y2-hr, x2 - arcSize, y2 );
-				arc.lineTo( x1, y2 );
+            case ARC_RIGHT_BOTTOM:
+                arc.moveTo(x2, y1);
+                arc.lineTo(x2, y2 - arcSize);
+                arc.quadTo(x2 - hr, y2 - hr, x2 - arcSize, y2);
+                arc.lineTo(x1, y2);
 
-				exterior.moveTo( fx2, fy2 - arcSize );
-				exterior.quadTo( fx2-hr, fy2-hr, fx2 - arcSize, fy2 );
-				exterior.lineTo( fx2, fy2 );
-				exterior.closePath();
-				break;
+                exterior.moveTo(fx2, fy2 - arcSize);
+                exterior.quadTo(fx2 - hr, fy2 - hr, fx2 - arcSize, fy2);
+                exterior.lineTo(fx2, fy2);
+                exterior.closePath();
+                break;
 
-			case ARC_BOTTOM_LEFT:
-				arc.moveTo( x2, y2 );
-				arc.lineTo( x1 + arcSize, y2 );
-				arc.quadTo( x1+hr, y2-hr, x1, y2 - arcSize );
-				arc.lineTo( x1, y1 );
+            case ARC_BOTTOM_LEFT:
+                arc.moveTo(x2, y2);
+                arc.lineTo(x1 + arcSize, y2);
+                arc.quadTo(x1 + hr, y2 - hr, x1, y2 - arcSize);
+                arc.lineTo(x1, y1);
 
-				exterior.moveTo( fx1 + arcSize, fy2 );
-				exterior.quadTo( fx1+hr, fy2-hr, fx1, fy2 - arcSize );
-				exterior.lineTo( fx1, fy2 );
-				exterior.closePath();
-		}
+                exterior.moveTo(fx1 + arcSize, fy2);
+                exterior.quadTo(fx1 + hr, fy2 - hr, fx1, fy2 - arcSize);
+                exterior.lineTo(fx1, fy2);
+                exterior.closePath();
+        }
 
-		pen = new BasicStroke( thickness );
-	}
-	private int cx, cy, cw, ch;
+        pen = new BasicStroke(thickness);
+    }
+    private int cx, cy, cw, ch;
 
-	private int arcEdges = ARC_TOP_RIGHT;
-	private int arcSize = 24;
-	private int thickness = 4;
-	private float hardening = 0.2f;
-	private Color color = null;
+    private int arcEdges = ARC_TOP_RIGHT;
+    private int arcSize = 24;
+    private int thickness = 4;
+    private float hardening = 0.2f;
+    private Color color = null;
 
-	private BasicStroke pen;
-	private GeneralPath exterior;
-	private GeneralPath arc;
+    private BasicStroke pen;
+    private GeneralPath exterior;
+    private GeneralPath arc;
 }
