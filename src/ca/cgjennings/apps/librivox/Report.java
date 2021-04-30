@@ -245,7 +245,7 @@ public class Report {
     }
 
     protected static void appendHeader(StringBuilder r) {
-        r.append("<html><body><table width=100% cellpadding=2>");
+        r.append("<html><body><table width=100% cellpadding=4>");
     }
 
     protected static void appendFooter(StringBuilder r, String caption) {

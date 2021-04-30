@@ -198,7 +198,8 @@ public class Checker extends javax.swing.JFrame {
             onTopItem.setVisible(false);
         }
 
-        pack();
+
+        setSize(getPreferredSize());
         loadPreferences();
         initAnimatedEntrance();
     }
@@ -302,7 +303,7 @@ public class Checker extends javax.swing.JFrame {
         aboutItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Checker " + VERSION);
+        setTitle("Checker");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 Checker.this.windowClosing(evt);
@@ -337,19 +338,20 @@ public class Checker extends javax.swing.JFrame {
 
         validationScroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        validationEditor.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        validationEditor.setContentType("text/html"); // NOI18N
         validationEditor.setEditable(false);
-        validationEditor.setText(string("greeting")); // NOI18N
+        validationEditor.setBorder(null);
+        validationEditor.setContentType("text/html"); // NOI18N
+        validationEditor.setText(string("greeting").replace("$VER", VERSION)
+        );
         validationScroll.setViewportView(validationEditor);
 
         infoTab.addTab(string("info-tab-validate"), validationScroll); // NOI18N
 
         informationScroll.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        informationEditor.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        informationEditor.setContentType("text/html"); // NOI18N
         informationEditor.setEditable(false);
+        informationEditor.setBorder(null);
+        informationEditor.setContentType("text/html"); // NOI18N
         informationEditor.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         informationScroll.setViewportView(informationEditor);
 
@@ -553,7 +555,7 @@ public class Checker extends javax.swing.JFrame {
 
         setJMenuBar(menuBar);
 
-        setSize(new java.awt.Dimension(548, 550));
+        setSize(new java.awt.Dimension(564, 550));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1044,6 +1046,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
         // Try to load preferred L&F, with system L&F as fallback
         try {
+            UIManager.put("TabbedPane.showTabSeparators", true);
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             try {
@@ -1331,21 +1334,26 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private static final int INITIAL_WINDOW_POSITION_MARGIN = 32;
 
     private void initAppIcons() {
-        List<Image> icons = new LinkedList<Image>();
-        URL imageURL = getClass().getResource("/resources/appicon.png");
-        if (imageURL != null) {
-            BufferedImage baseImage = null;
-            try {
-                baseImage = ImageIO.read(imageURL);
-            } catch (IOException e) {
-                getLogger().log(Level.WARNING, "failed to read icon image", e);
-            }
-            if (baseImage != null) {
-                icons.add(baseImage);
-                for (int size = baseImage.getWidth() / 2; size >= 16; size /= 2) {
-                    baseImage = ImageUtils.resizeImage(baseImage, 0.5f);
-                    icons.add(baseImage);
+        final List<Image> icons = new LinkedList<Image>();
+        final String[] iconFiles = new String[] {
+            "pass@4x", "pass@2x", "pass"
+        };
+
+        for(String file : iconFiles) {
+            BufferedImage image = null;
+            Throwable failReason = null;
+            URL imageURL = getClass().getResource("/resources/" + file + ".png");
+            if(imageURL != null) {
+                try {
+                    image = ImageIO.read(imageURL);
+                } catch(IOException ex) {
+                    failReason = ex;
                 }
+            }
+            if(image == null) {
+                getLogger().log(Level.WARNING, "failed to read icon image", failReason);
+            } else {
+                icons.add(image);
             }
         }
         setIconImages(icons);
