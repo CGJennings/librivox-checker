@@ -116,7 +116,7 @@ public class HelpViewer extends javax.swing.JDialog {
         viewScroll.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 0, java.awt.Color.gray));
 
         view.setEditable(false);
-        view.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        view.setBorder(null);
         view.setContentType("text/html"); // NOI18N
         view.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         view.addHyperlinkListener( new HyperlinkListener() {
