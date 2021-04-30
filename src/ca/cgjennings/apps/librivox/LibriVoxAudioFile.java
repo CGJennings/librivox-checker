@@ -1,13 +1,15 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.getLogger;
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.apps.librivox.decoder.AudioFrame;
 import ca.cgjennings.apps.librivox.decoder.DecoderFactory;
 import ca.cgjennings.apps.librivox.decoder.NotAnMP3Exception;
 import ca.cgjennings.apps.librivox.decoder.StreamDecoder;
 import ca.cgjennings.apps.librivox.metadata.MP3FileMetadata;
 import ca.cgjennings.apps.librivox.metadata.MetadataEditorLinkFactory;
-import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.apps.librivox.validators.Validator;
+import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import java.awt.EventQueue;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -24,8 +26,6 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.Locale;
 import java.util.logging.Level;
-import static ca.cgjennings.apps.librivox.Checker.string;
-import static ca.cgjennings.apps.librivox.Checker.getLogger;
 
 /**
  * Represents an .mp3 file to be validated, and controls the stages of the

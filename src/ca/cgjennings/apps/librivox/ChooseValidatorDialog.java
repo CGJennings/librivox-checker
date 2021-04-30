@@ -1,5 +1,6 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.apps.librivox.validators.Validator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.platform.PlatformSupport;
@@ -8,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
-import static ca.cgjennings.apps.librivox.Checker.string;
 
 /**
  * Dialog for selecting which validators to run.

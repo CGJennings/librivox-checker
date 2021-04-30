@@ -1,26 +1,26 @@
 package ca.cgjennings.apps.librivox;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.InputStream;
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.ui.LinearHistory;
 import ca.cgjennings.util.Settings;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLDocument;
-import static ca.cgjennings.apps.librivox.Checker.string;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 

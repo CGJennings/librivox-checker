@@ -1,10 +1,10 @@
 package ca.cgjennings.apps.librivox;
 
-import ca.cgjennings.apps.librivox.tools.WaveformViewer;
 import ca.cgjennings.apps.librivox.LibriVoxAudioFile.Status;
 import ca.cgjennings.apps.librivox.metadata.MetadataEditorLinkFactory;
 import ca.cgjennings.apps.librivox.tools.ID3Editor;
 import ca.cgjennings.apps.librivox.tools.ID3UpgradeTool;
+import ca.cgjennings.apps.librivox.tools.WaveformViewer;
 import ca.cgjennings.apps.librivox.validators.AbstractValidator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.io.StreamCopier;

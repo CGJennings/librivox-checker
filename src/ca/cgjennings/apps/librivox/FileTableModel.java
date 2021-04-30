@@ -1,5 +1,6 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.apps.librivox.LibriVoxAudioFile.Status;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import static ca.cgjennings.apps.librivox.Checker.string;
 
 /**
  * Structures a collection of {@link LibriVoxAudioFile} objects for display in a
