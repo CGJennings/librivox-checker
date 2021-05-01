@@ -89,8 +89,8 @@ public class ImageUtils {
         if (bi == null) {
             throw new NullPointerException("bi");
         }
-        float xs = (float) maxDimen / (float) bi.getWidth();
-        float ys = (float) maxDimen / (float) bi.getHeight();
+        float xs = maxDimen / (float) bi.getWidth();
+        float ys = maxDimen / (float) bi.getHeight();
         float s = Math.min(xs, ys);
         if (s >= 1f) {
             return bi;

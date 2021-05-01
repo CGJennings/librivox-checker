@@ -654,7 +654,7 @@ public class LibriVoxAudioFile {
         if (progress < 0) {
             return -1f;
         }
-        float p = (float) progress / (float) progressMax;
+        float p = progress / (float) progressMax;
         if (p > 1f) {
             p = 1f;
         }
