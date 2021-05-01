@@ -1,13 +1,15 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.getLogger;
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.apps.librivox.decoder.AudioFrame;
 import ca.cgjennings.apps.librivox.decoder.DecoderFactory;
 import ca.cgjennings.apps.librivox.decoder.NotAnMP3Exception;
 import ca.cgjennings.apps.librivox.decoder.StreamDecoder;
 import ca.cgjennings.apps.librivox.metadata.MP3FileMetadata;
 import ca.cgjennings.apps.librivox.metadata.MetadataEditorLinkFactory;
-import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.apps.librivox.validators.Validator;
+import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import java.awt.EventQueue;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -24,8 +26,6 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.Locale;
 import java.util.logging.Level;
-import static ca.cgjennings.apps.librivox.Checker.string;
-import static ca.cgjennings.apps.librivox.Checker.getLogger;
 
 /**
  * Represents an .mp3 file to be validated, and controls the stages of the
@@ -138,25 +138,22 @@ public class LibriVoxAudioFile {
             throw new IllegalStateException("must be called from dispatch thread");
         }
         cancelAnalysis(true);
-        Runnable job = new Runnable() {
-            @Override
-            public void run() {
-                boolean ok;
-                if ((taskFlags & WORKER_TASK_DOWNLOAD) != 0) {
-                    setStatus(Status.DOWNLOADING);
-                    ok = download();
-                    if (!ok || Thread.interrupted()) {
-                        return;
-                    }
+        Runnable job = () -> {
+            boolean ok;
+            if ((taskFlags & WORKER_TASK_DOWNLOAD) != 0) {
+                setStatus(Status.DOWNLOADING);
+                ok = download();
+                if (!ok || Thread.interrupted()) {
+                    return;
                 }
-                if ((taskFlags & WORKER_TASK_ANALYZE) != 0) {
-                    ok = analyze();
-                    if (!ok || Thread.interrupted()) {
-                        return;
-                    }
-                }
-                // ... additional tasks
             }
+            if ((taskFlags & WORKER_TASK_ANALYZE) != 0) {
+                ok = analyze();
+                if (!ok || Thread.interrupted()) {
+                    return;
+                }
+            }
+            // ... additional tasks
         };
         report = new Report(this);
         jobToken = JobManager.analyzeInFuture(this, job);
@@ -634,12 +631,9 @@ public class LibriVoxAudioFile {
      */
     private void fireProgressUpdate() {
         if (owner != null) {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (owner != null) {
-                        owner.progressUpdate(LibriVoxAudioFile.this);
-                    }
+            EventQueue.invokeLater(() -> {
+                if (owner != null) {
+                    owner.progressUpdate(LibriVoxAudioFile.this);
                 }
             });
         }
@@ -660,7 +654,7 @@ public class LibriVoxAudioFile {
         if (progress < 0) {
             return -1f;
         }
-        float p = (float) progress / (float) progressMax;
+        float p = progress / (float) progressMax;
         if (p > 1f) {
             p = 1f;
         }

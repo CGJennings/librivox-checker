@@ -1,10 +1,10 @@
 package ca.cgjennings.apps.librivox;
 
-import ca.cgjennings.apps.librivox.tools.WaveformViewer;
 import ca.cgjennings.apps.librivox.LibriVoxAudioFile.Status;
 import ca.cgjennings.apps.librivox.metadata.MetadataEditorLinkFactory;
 import ca.cgjennings.apps.librivox.tools.ID3Editor;
 import ca.cgjennings.apps.librivox.tools.ID3UpgradeTool;
+import ca.cgjennings.apps.librivox.tools.WaveformViewer;
 import ca.cgjennings.apps.librivox.validators.AbstractValidator;
 import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.io.StreamCopier;
@@ -59,15 +59,10 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.MenuEvent;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
@@ -79,8 +74,11 @@ import javax.swing.text.html.StyleSheet;
  *
  * @author Christopher G. Jennings (cjennings@acm.org)
  */
-public class Checker extends javax.swing.JFrame {
-    /** Current version number. */
+public final class Checker extends javax.swing.JFrame {
+
+    /**
+     * Current version number.
+     */
     public static final String VERSION = "1.0.97";
 
     /**
@@ -101,7 +99,7 @@ public class Checker extends javax.swing.JFrame {
 
         initAppIcons();
         initComponents();
-        localizeMenu(menuBar);
+        localizeMenu(appMenuBar);
         installOSXMenuHandlers();
         installMenuUpdater();
 
@@ -122,26 +120,20 @@ public class Checker extends javax.swing.JFrame {
         fileTable.getColumnModel().getColumn(FileTableModel.COL_PROGRESS)
                 .setCellRenderer(model.getProgressRenderer());
 
-        fileTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                int sel = fileTable.getSelectedRow();
-                if (sel >= 0) {
-                    sel = fileTable.convertRowIndexToModel(sel);
-                }
-                updateReportViews(sel);
+        fileTable.getSelectionModel().addListSelectionListener(e -> {
+            int sel = fileTable.getSelectedRow();
+            if (sel >= 0) {
+                sel = fileTable.convertRowIndexToModel(sel);
             }
+            updateReportViews(sel);
         });
 
-        model.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                int firstRow = e.getFirstRow();
-                int lastRow = e.getLastRow();
+        model.addTableModelListener(e -> {
+            int firstRow = e.getFirstRow();
+            int lastRow = e.getLastRow();
 
-                if (rowShownInReportViews >= firstRow && rowShownInReportViews <= lastRow) {
-                    updateReportViews(rowShownInReportViews);
-                }
+            if (rowShownInReportViews >= firstRow && rowShownInReportViews <= lastRow) {
+                updateReportViews(rowShownInReportViews);
             }
         });
 
@@ -152,33 +144,30 @@ public class Checker extends javax.swing.JFrame {
         tcm.getColumn(1).setPreferredWidth(cw);
         tcm.getColumn(0).setPreferredWidth(tw - cw);
 
-        HyperlinkListener hll = new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    URL url = e.getURL();
-                    if (url != null) {
-                        // handle absolute URLs, if desired
-                    } else {
-                        String link = e.getDescription();
-                        if (MetadataEditorLinkFactory.isLink(link)) {
-                            // get the rectangle covered by the <a> element
-                            Element el = e.getSourceElement();
-                            JEditorPane pane = (JEditorPane) e.getSource();
-                            Rectangle coverRect = null;
-                            try {
-                                coverRect = pane.modelToView(el.getStartOffset());
-                                coverRect.add(pane.modelToView(el.getEndOffset()));
-                                Point p = coverRect.getLocation();
-                                SwingUtilities.convertPointToScreen(p, pane);
-                                coverRect.setLocation(p);
-                            } catch (BadLocationException ble) {
-                                getLogger().log(Level.SEVERE, null, ble);
-                            }
-                            MetadataEditorLinkFactory.showEditor(link, coverRect);
-                        } else {
-                            showHelpFile(link);
+        HyperlinkListener hll = e -> {
+            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                URL url = e.getURL();
+                if (url != null) {
+                    // handle absolute URLs, if desired
+                } else {
+                    String link = e.getDescription();
+                    if (MetadataEditorLinkFactory.isLink(link)) {
+                        // get the rectangle covered by the <a> element
+                        Element el = e.getSourceElement();
+                        JEditorPane pane = (JEditorPane) e.getSource();
+                        Rectangle coverRect = null;
+                        try {
+                            coverRect = pane.modelToView(el.getStartOffset());
+                            coverRect.add(pane.modelToView(el.getEndOffset()));
+                            Point p = coverRect.getLocation();
+                            SwingUtilities.convertPointToScreen(p, pane);
+                            coverRect.setLocation(p);
+                        } catch (BadLocationException ble) {
+                            getLogger().log(Level.SEVERE, null, ble);
                         }
+                        MetadataEditorLinkFactory.showEditor(link, coverRect);
+                    } else {
+                        showHelpFile(link);
                     }
                 }
             }
@@ -197,7 +186,6 @@ public class Checker extends javax.swing.JFrame {
             onTopSeparator.setVisible(false);
             onTopItem.setVisible(false);
         }
-
 
         setSize(getPreferredSize());
         loadPreferences();
@@ -243,7 +231,7 @@ public class Checker extends javax.swing.JFrame {
 
     public LibriVoxAudioFile[] getSelectedFiles() {
         int[] rows = getSelectedRows();
-        LibriVoxAudioFile files[] = new LibriVoxAudioFile[rows.length];
+        LibriVoxAudioFile[] files = new LibriVoxAudioFile[rows.length];
         for (int i = 0; i < rows.length; ++i) {
             files[i] = model.getRow(rows[i]);
         }
@@ -268,7 +256,7 @@ public class Checker extends javax.swing.JFrame {
         validationEditor = new javax.swing.JEditorPane();
         javax.swing.JScrollPane informationScroll = new javax.swing.JScrollPane();
         informationEditor = new javax.swing.JEditorPane();
-        menuBar = new javax.swing.JMenuBar();
+        appMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         checkFileItem = new javax.swing.JMenuItem();
         checkURLItem = new javax.swing.JMenuItem();
@@ -396,7 +384,7 @@ public class Checker extends javax.swing.JFrame {
         });
         fileMenu.add(exitItem);
 
-        menuBar.add(fileMenu);
+        appMenuBar.add(fileMenu);
 
         editMenu.setText("edit");
 
@@ -450,7 +438,7 @@ public class Checker extends javax.swing.JFrame {
         });
         editMenu.add(copyInformationItem);
 
-        menuBar.add(editMenu);
+        appMenuBar.add(editMenu);
 
         strictnessMenu.setText("validation");
 
@@ -482,7 +470,7 @@ public class Checker extends javax.swing.JFrame {
         });
         strictnessMenu.add(chooseValidatorsItem);
 
-        menuBar.add(strictnessMenu);
+        appMenuBar.add(strictnessMenu);
 
         toolMenu.setText("tools");
 
@@ -519,7 +507,7 @@ public class Checker extends javax.swing.JFrame {
         });
         toolMenu.add(onTopItem);
 
-        menuBar.add(toolMenu);
+        appMenuBar.add(toolMenu);
 
         helpMenu.setText("help");
 
@@ -548,9 +536,9 @@ public class Checker extends javax.swing.JFrame {
         });
         helpMenu.add(aboutItem);
 
-        menuBar.add(helpMenu);
+        appMenuBar.add(helpMenu);
 
-        setJMenuBar(menuBar);
+        setJMenuBar(appMenuBar);
 
         setSize(new java.awt.Dimension(564, 550));
         setLocationRelativeTo(null);
@@ -759,12 +747,11 @@ private void fileTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
     if (evt.getClickCount() >= 2 && evt.getButton() == MouseEvent.BUTTON1) {
         Point p = evt.getPoint();
         int row = fileTable.convertRowIndexToModel(fileTable.rowAtPoint(p));
-//		int col = fileTable.convertColumnIndexToModel( fileTable.columnAtPoint( p ) );
-        if (row >= 0 && row < model.getRowCount() /* && col == FileTableModel.COL_FILE */) {
+        if (row >= 0 && row < model.getRowCount()) {
             LibriVoxAudioFile file = model.getRow(row);
             try {
                 Desktop.getDesktop().open(file.getLocalFile());
-            } catch (Throwable t) {
+            } catch (IOException t) {
                 getLogger().warning(t.toString());
             }
         }
@@ -889,16 +876,12 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private void initDropTarget() {
         new ca.cgjennings.ui.dnd.FileDrop(getRootPane(),
                 BorderFactory.createLineBorder(new Color(0x025095), 3),
-                tableScrollPane, true,
-                new ca.cgjennings.ui.dnd.FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                int top = model.getRowCount();
-                for (File f : files) {
-                    checkFile(f);
-                }
-                ensureRowIsVisible(top);
-            }
+                tableScrollPane, true, files -> {
+                    int top = model.getRowCount();
+                    for (File f : files) {
+                        checkFile(f);
+                    }
+                    ensureRowIsVisible(top);
         });
     }
 
@@ -920,12 +903,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if (EventQueue.isDispatchThread()) {
             setWaitCursorImpl(waiting);
         } else {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    setWaitCursorImpl(waiting);
-                }
-            });
+            EventQueue.invokeLater(() -> setWaitCursorImpl(waiting));
         }
     }
 
@@ -1014,13 +992,10 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     public static void main(String args[]) {
         initLoggerLevel(Level.WARNING);
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                initLookAndFeel();
-                mainApp = new Checker();
-                MetadataEditorLinkFactory.setEditorParentFrame(mainApp);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            initLookAndFeel();
+            mainApp = new Checker();
+            MetadataEditorLinkFactory.setEditorParentFrame(mainApp);
         });
     }
 
@@ -1035,7 +1010,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             try {
                 System.setProperty("apple.laf.useScreenMenuBar", "true");
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
                 getLogger().log(Level.SEVERE, null, e);
             }
             return;
@@ -1048,7 +1023,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch(ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex2) {
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex2) {
                 getLogger().log(Level.SEVERE, null, ex);
             }
         }
@@ -1070,13 +1045,13 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             fileMenu.remove(exitItem);
             helpMenu.remove(aboutSeparator);
             helpMenu.remove(aboutItem);
-        } catch (Exception ex) {
+        } catch (NoSuchMethodException | SecurityException ex) {
             getLogger().log(Level.SEVERE, null, ex);
         }
     }
 
     private static void initLoggerLevel(Level level) {
-        Logger base = Logger.global;
+        Logger base = Logger.getGlobal();
         while (base.getParent() != null) {
             base = base.getParent();
         }
@@ -1085,6 +1060,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutItem;
     private javax.swing.JPopupMenu.Separator aboutSeparator;
+    private javax.swing.JMenuBar appMenuBar;
     private javax.swing.JMenuItem checkFileItem;
     private javax.swing.JMenuItem checkURLItem;
     private javax.swing.JMenuItem chooseValidatorsItem;
@@ -1105,7 +1081,6 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JTabbedPane infoTab;
     private javax.swing.JEditorPane informationEditor;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JCheckBoxMenuItem onTopItem;
     private javax.swing.JPopupMenu.Separator onTopSeparator;
     private javax.swing.JMenuItem quickStartItem;
@@ -1331,23 +1306,23 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private static final int INITIAL_WINDOW_POSITION_MARGIN = 32;
 
     private void initAppIcons() {
-        final List<Image> icons = new LinkedList<Image>();
-        final String[] iconFiles = new String[] {
+        final List<Image> icons = new LinkedList<>();
+        final String[] iconFiles = new String[]{
             "pass@4x", "pass@2x", "pass"
         };
 
-        for(String file : iconFiles) {
+        for (String file : iconFiles) {
             BufferedImage image = null;
             Throwable failReason = null;
             URL imageURL = getClass().getResource("/resources/" + file + ".png");
-            if(imageURL != null) {
+            if (imageURL != null) {
                 try {
                     image = ImageIO.read(imageURL);
-                } catch(IOException ex) {
+                } catch (IOException ex) {
                     failReason = ex;
                 }
             }
-            if(image == null) {
+            if (image == null) {
                 getLogger().log(Level.WARNING, "failed to read icon image", failReason);
             } else {
                 icons.add(image);

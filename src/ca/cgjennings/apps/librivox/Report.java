@@ -1,13 +1,13 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.string;
 import ca.cgjennings.apps.librivox.validators.AbstractValidator;
-import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.apps.librivox.validators.Validator;
 import ca.cgjennings.apps.librivox.validators.Validator.Category;
 import ca.cgjennings.apps.librivox.validators.Validator.Validity;
+import ca.cgjennings.apps.librivox.validators.ValidatorFactory;
 import ca.cgjennings.util.Settings;
 import java.util.Iterator;
-import static ca.cgjennings.apps.librivox.Checker.string;
 
 /**
  * Used to compile reports of the validation of a {@link LibriVoxAudioFile}.

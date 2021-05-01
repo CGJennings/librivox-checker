@@ -83,7 +83,7 @@ class JobManager {
         final int cpus = DEBUG_THREAD_COUNT < 1
                 ? Math.max(2, Runtime.getRuntime().availableProcessors())
                 : DEBUG_THREAD_COUNT;
-        BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(Integer.MAX_VALUE);
+        BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(Integer.MAX_VALUE);
         threadPool = new ThreadPoolExecutor(cpus, cpus, KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS, workQueue, threadFactory);
         threadPool.prestartAllCoreThreads();
     }

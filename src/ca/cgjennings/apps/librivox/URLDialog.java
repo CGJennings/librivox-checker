@@ -1,10 +1,10 @@
 package ca.cgjennings.apps.librivox;
 
+import static ca.cgjennings.apps.librivox.Checker.string;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.UIManager;
-import static ca.cgjennings.apps.librivox.Checker.string;
 
 /**
  * Dialog for entering URLs to add to the file table.
