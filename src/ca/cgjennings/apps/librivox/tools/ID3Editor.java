@@ -166,7 +166,6 @@ public class ID3Editor extends javax.swing.JDialog {
         okBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         javax.swing.JLabel spacer = new javax.swing.JLabel();
-        overlayPanel = new ca.cgjennings.ui.OverlayPanel();
         formatCombo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -523,26 +522,12 @@ public class ID3Editor extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         footerPanel.add(spacer, gridBagConstraints);
 
-        ca.cgjennings.ui.ArcBorder arcBorder1 = new ca.cgjennings.ui.ArcBorder();
-        arcBorder1.setArcSize(28);
-        arcBorder1.setHardening(0.3F);
-        arcBorder1.setThickness(2);
-        overlayPanel.setBorder(arcBorder1);
-        overlayPanel.setLayout(new java.awt.GridBagLayout());
-
         formatCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID3 v2.3", "ID3 v2.4" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 16);
-        overlayPanel.add(formatCombo, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
-        footerPanel.add(overlayPanel, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 8, 8, 8);
+        footerPanel.add(formatCombo, gridBagConstraints);
 
         getContentPane().add(footerPanel, java.awt.BorderLayout.SOUTH);
 
@@ -679,7 +664,6 @@ public class ID3Editor extends javax.swing.JDialog {
     private javax.swing.JPanel listPanel;
     private javax.swing.JButton okBtn;
     private javax.swing.JPanel okCancelBtn;
-    private ca.cgjennings.ui.OverlayPanel overlayPanel;
     private javax.swing.JCheckBox titleCheck;
     private javax.swing.JTextField titleField;
     private javax.swing.JLabel titleLabel;
