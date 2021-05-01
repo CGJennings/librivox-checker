@@ -142,9 +142,8 @@ class ChooseValidatorDialog extends javax.swing.JDialog {
         descScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         descScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        descField.setColumns(20);
         descField.setEditable(false);
-        descField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        descField.setColumns(20);
         descField.setLineWrap(true);
         descField.setRows(3);
         descField.setTabSize(4);
