@@ -16,11 +16,12 @@ import java.util.regex.Pattern;
  * @author Christopher G. Jennings (https://cgjennings.ca/contact/)
  */
 public class UpdateCheck {
+
     private UpdateCheck() {
     }
 
-    private static String RELEASE_INFO_URL =
-            "https://api.github.com/repos/cgjennings/librivox_checker/releases/latest";
+    private static String RELEASE_INFO_URL
+            = "https://api.github.com/repos/cgjennings/librivox_checker/releases/latest";
 
     /**
      * Checks if an update is available.
@@ -31,32 +32,32 @@ public class UpdateCheck {
         try {
             String newVersion = getLatestAvailableVersion();
             return isNewer(Checker.VERSION, newVersion) ? 1 : 0;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return -1;
         }
     }
 
     /**
-     * Returns the version tag for the most recent release on GitHub.
-     * The release must use a tag like "vX.Y.Z" to be detected
-     * as a possible update.
-     * 
-     * @return the version tag, or null if none was available (e.g., network down)
+     * Returns the version tag for the most recent release on GitHub. The
+     * release must use a tag like "vX.Y.Z" to be detected as a possible update.
+     *
+     * @return the version tag, or null if none was available (e.g., network
+     * down)
      */
     public static String getLatestAvailableVersion() {
         try {
             String json = urlToString(new URL(RELEASE_INFO_URL));
             String version = gitHubReleaseInfoToVersion(json);
             return version;
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             Logger.getGlobal().log(Level.WARNING, "unable to check for update", ex);
         }
         return null;
     }
 
     /**
-     * Returns whether a version described by a string such as "1.0.1" is
-     * newer than this app's version.
+     * Returns whether a version described by a string such as "1.0.1" is newer
+     * than this app's version.
      *
      * @param thisVersion the version of this app
      * @param newVersion the version that may be newer than this version
@@ -69,13 +70,13 @@ public class UpdateCheck {
     private static long toComparable(String version) {
         String[] tokens = version.split("\\.", 4);
         long n = 0L;
-        if(tokens.length >= 1) {
+        if (tokens.length >= 1) {
             n += 100_000_000_000_000_000L * parse(tokens[0]);
         }
-        if(tokens.length >= 2) {
+        if (tokens.length >= 2) {
             n += 100_000_000_000L * parse(tokens[1]);
         }
-        if(tokens.length >= 3) {
+        if (tokens.length >= 3) {
             n += parse(tokens[2]);
         }
         return n;
@@ -84,7 +85,7 @@ public class UpdateCheck {
     private static long parse(String chunk) {
         try {
             return Long.parseLong(chunk);
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("invalid version string chunk " + chunk);
         }
     }
@@ -106,7 +107,7 @@ public class UpdateCheck {
     private static String gitHubReleaseInfoToVersion(String json) {
         Pattern p = Pattern.compile("\"tag_name\":\\s*\"v([\\d.]+)\"", Pattern.MULTILINE);
         Matcher m = p.matcher(json);
-        if(m.find()) {
+        if (m.find()) {
             return m.group(1);
         }
         Logger.getGlobal().log(Level.WARNING, "unable to find version info", json);

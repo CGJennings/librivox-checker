@@ -899,7 +899,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                         checkFile(f);
                     }
                     ensureRowIsVisible(top);
-        });
+                });
     }
 
     /**
@@ -1509,30 +1509,30 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     /**
      * Check online if a new release is available.
      *
-     * @param silentUnlessUpdateAvailable if true, the result of the check
-     *   is only reported if an update is available
+     * @param silentUnlessUpdateAvailable if true, the result of the check is
+     * only reported if an update is available
      */
     private void checkForAppUpdate(final boolean silentUnlessUpdateAvailable) {
-        new Thread(()->{
+        new Thread(() -> {
             final int result = UpdateCheck.checkForUpdate();
-            EventQueue.invokeLater(()->{
+            EventQueue.invokeLater(() -> {
                 getSettings().setLong(PREF_LAST_UPDATE_CHECK, System.currentTimeMillis());
 
-                if(result <= 0 && silentUnlessUpdateAvailable) {
+                if (result <= 0 && silentUnlessUpdateAvailable) {
                     return;
                 }
 
-                if(result == 1) {
-                    Object[] options = new Object[] { string("close"), string("update-download") };
-                    if(!Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        options = new Object[] { options[0] };
+                if (result == 1) {
+                    Object[] options = new Object[]{string("close"), string("update-download")};
+                    if (!Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                        options = new Object[]{options[0]};
                     }
                     final int choice = JOptionPane.showOptionDialog(
                             Checker.this, string("update-available"),
                             getTitle(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                            null, options, options[options.length-1]
+                            null, options, options[options.length - 1]
                     );
-                    if(choice == 1) {
+                    if (choice == 1) {
                         try {
                             Desktop.getDesktop().browse(new URI(DOWNLOAD_PAGE));
                         } catch (IOException | URISyntaxException ex) {
@@ -1552,13 +1552,13 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
 
     /**
-     * Checks if an update is available if it has been 30 days since the
-     * last check.
+     * Checks if an update is available if it has been 30 days since the last
+     * check.
      */
     private void checkForAppUpdateOnceAMonth() {
         long now = System.currentTimeMillis();
         long lastCheck = getSettings().getLong(PREF_LAST_UPDATE_CHECK, 0L);
-        if(lastCheck != 0L && (now - lastCheck) >= ONE_MONTH) {
+        if (lastCheck != 0L && (now - lastCheck) >= ONE_MONTH) {
             getLogger().info("starting monthly update check");
             checkForAppUpdate(true);
         }
