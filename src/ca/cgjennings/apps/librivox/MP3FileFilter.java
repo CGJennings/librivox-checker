@@ -9,7 +9,7 @@ import java.util.Locale;
  * <code>javax.swing.filechooser.JFileChooser</code> filter, or a
  * <code>java.io.FileFilter</code>.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class MP3FileFilter extends javax.swing.filechooser.FileFilter implements java.io.FileFilter {
 

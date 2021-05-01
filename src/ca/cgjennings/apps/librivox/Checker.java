@@ -72,7 +72,7 @@ import javax.swing.text.html.StyleSheet;
 /**
  * Main application for the checker tool.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public final class Checker extends javax.swing.JFrame {
 

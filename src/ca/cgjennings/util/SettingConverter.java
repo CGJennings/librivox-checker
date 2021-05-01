@@ -11,7 +11,7 @@ package ca.cgjennings.util;
  *     O.equals( fromSetting( toSetting( O ) ) )
  * </pre>
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public interface SettingConverter<T> {
 

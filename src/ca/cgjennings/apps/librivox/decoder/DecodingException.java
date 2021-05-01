@@ -11,7 +11,7 @@ import java.io.IOException;
  * (adding appropriate messages to a {@link Report}), but will give up if too
  * many errors occur.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class DecodingException extends IOException {
 

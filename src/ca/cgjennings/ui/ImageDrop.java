@@ -18,7 +18,7 @@ import javax.swing.UIManager;
 /**
  * A control that image files can be dragged and dropped onto.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.92
  */
 public class ImageDrop extends JLabel {

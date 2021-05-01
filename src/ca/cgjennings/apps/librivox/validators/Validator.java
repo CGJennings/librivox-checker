@@ -30,7 +30,7 @@ import ca.cgjennings.apps.librivox.decoder.AudioHeader;
  * for fetching and applying a strictness to individual tests which allows the
  * user to control the strictness of tests using configuration files.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public interface Validator {
 

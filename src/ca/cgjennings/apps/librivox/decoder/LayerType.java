@@ -3,7 +3,7 @@ package ca.cgjennings.apps.librivox.decoder;
 /**
  * A enumeration of the possible MPEG Audio layer types.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public enum LayerType {

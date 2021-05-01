@@ -1,6 +1,6 @@
 /*
  * 09/26/08 : decodeFrame may throw DecoderException (see LayerIDecoder.java)
- *            Christopher G. Jennings (cjennings@acm.org)
+ *            Christopher G. Jennings https://cgjennings.ca/contact/
  * 
  * 11/19/04		1.0 moved to LGPL.
  * 12/12/99		Initial version.	mdm@techie.com

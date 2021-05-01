@@ -13,7 +13,7 @@ package ca.cgjennings.apps.librivox.decoder;
  * never be written to. If a mutable buffer is required, clone the provided
  * buffer and mutate the contents of the clone.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class AudioFrame {
 

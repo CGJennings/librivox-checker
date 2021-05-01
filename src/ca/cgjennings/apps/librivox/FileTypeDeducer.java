@@ -9,7 +9,7 @@ import java.io.InputStream;
  * Guess the type of an audio file using magic numbers (byte patterns found at
  * the start of the file).
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.90
  */
 class FileTypeDeducer {

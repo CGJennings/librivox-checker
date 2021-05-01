@@ -1,6 +1,6 @@
 /*
  * 09/26/08 : made ms_per_frame_array class static
- *            Christopher G. Jennings (cjennings@acm.org)
+ *            Christopher G. Jennings https://cgjennings.ca/contact/
  *
  * 11/19/04 : 1.0 moved to LGPL.
  *            VBRI header support added, E.B javalayer@javazoom.net

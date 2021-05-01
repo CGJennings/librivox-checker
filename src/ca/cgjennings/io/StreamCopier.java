@@ -10,7 +10,7 @@ import java.io.OutputStream;
 /**
  * A utility class for copying data between streams with a minimum of fuss.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class StreamCopier {
 

@@ -29,7 +29,7 @@ import org.jaudiotagger.audio.mp3.MP3AudioHeader;
 /**
  * A "validator" that creates an oscilloscope image of the file's waveform.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 class WaveformImager extends AbstractValidator {
 

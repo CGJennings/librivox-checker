@@ -1,5 +1,5 @@
 /*
- * 09/26/08     throw exception on subbband alloc error: Christopher G. Jennings (cjennings@acm.org)
+ * 09/26/08     throw exception on subbband alloc error: Christopher G. Jennings https://cgjennings.ca/contact/
  * 11/19/04		1.0 moved to LGPL.
  * 
  * 12/12/99		Initial version. Adapted from javalayer.java

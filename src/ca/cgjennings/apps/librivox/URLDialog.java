@@ -9,7 +9,7 @@ import javax.swing.UIManager;
 /**
  * Dialog for entering URLs to add to the file table.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class URLDialog extends javax.swing.JDialog {
 

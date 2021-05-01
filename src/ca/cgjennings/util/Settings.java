@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 /**
  * A container for application settings.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class Settings {
 

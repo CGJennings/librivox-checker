@@ -31,7 +31,7 @@ import java.util.Locale;
  * used directly, but are accessed indirectly by higher-level methods designed
  * to simplify report generation.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public abstract class AbstractValidator implements Validator {
 

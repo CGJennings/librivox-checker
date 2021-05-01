@@ -6,7 +6,7 @@ import java.util.logging.Level;
 /**
  * Interprets a LibriVox file name as a metadata container.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class LibriVoxFileNameMetadata {
 

@@ -12,7 +12,7 @@ import ca.cgjennings.apps.librivox.Checker;
  * default validators, as they will treat the two channels as stereo data for
  * the purpose of determining volume and other waveform analyses.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public enum ChannelFormat {

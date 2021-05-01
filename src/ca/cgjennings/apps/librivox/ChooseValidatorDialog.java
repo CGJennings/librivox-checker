@@ -13,7 +13,7 @@ import javax.swing.JCheckBox;
 /**
  * Dialog for selecting which validators to run.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.92
  */
 class ChooseValidatorDialog extends javax.swing.JDialog {

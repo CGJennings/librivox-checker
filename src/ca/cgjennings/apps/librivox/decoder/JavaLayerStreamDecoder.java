@@ -20,7 +20,7 @@ import javazoom.jl.decoder.SampleBuffer;
  * An implementation of {@link StreamDecoder} that uses the JavaLayer library to
  * perform decoding.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 final class JavaLayerStreamDecoder implements StreamDecoder {
 

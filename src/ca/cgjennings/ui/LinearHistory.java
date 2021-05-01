@@ -8,7 +8,7 @@ import java.util.List;
  * them to be replayed, as with the forward/back operations in a browsing
  * interface.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public class LinearHistory<P> {

@@ -14,7 +14,7 @@ import static ca.cgjennings.apps.librivox.Checker.string;
 /**
  * A validator for metadata contained in the ID3 tag(s).
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class MetadataValidator extends AbstractValidator {
 

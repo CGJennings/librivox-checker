@@ -7,7 +7,7 @@ import static ca.cgjennings.apps.librivox.Checker.string;
 /**
  * A dialog that displays errors encountered by a file processor.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.92
  */
 class ProcessingErrorDialog extends javax.swing.JDialog {

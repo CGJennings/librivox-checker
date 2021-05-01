@@ -7,7 +7,7 @@ import java.io.InputStream;
 /**
  * A factory that creates MP3 decoders for input streams.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public final class DecoderFactory {
 

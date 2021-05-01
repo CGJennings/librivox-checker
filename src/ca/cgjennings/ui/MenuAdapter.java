@@ -7,7 +7,7 @@ import javax.swing.event.MenuListener;
  * An adapter class for <code>MenuListener</code>s that provides default no-op
  * implementations of all methods.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class MenuAdapter implements MenuListener {
 

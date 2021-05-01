@@ -7,7 +7,7 @@ import java.net.URL;
  * This is a wrapper for a {@link MetadataView} that will return the empty
  * string instead of <code>null</code> for any missing string field.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public class SafeMetadataView implements MetadataView {

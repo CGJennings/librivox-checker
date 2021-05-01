@@ -16,7 +16,7 @@ import static ca.cgjennings.apps.librivox.Checker.string;
  * dialog showing the progress as it goes. Any errors that occur during
  * processing are collected and displayed separately after completion.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.92
  */
 public class FileProcessor extends javax.swing.JDialog {

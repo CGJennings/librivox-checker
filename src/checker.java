@@ -6,7 +6,7 @@
  * under OS X the menu bar will display the application name simply as "checker"
  * rather than the fully qualified application class name.)
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public final class checker {

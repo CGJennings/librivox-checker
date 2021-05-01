@@ -7,7 +7,7 @@ import java.net.URL;
  * Instances of this interface are returned by {@link MP3FileMetadata} to
  * provide abstract views of metadata contained in an MP3 file.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public interface MetadataView {

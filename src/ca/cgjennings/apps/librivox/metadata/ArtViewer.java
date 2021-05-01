@@ -8,7 +8,7 @@ import static ca.cgjennings.apps.librivox.Checker.string;
 /**
  * A simple dialog for displaying artwork stored in metadata.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 class ArtViewer extends javax.swing.JDialog {

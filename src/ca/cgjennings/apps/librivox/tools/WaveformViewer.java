@@ -22,7 +22,7 @@ import java.util.logging.Level;
 /**
  * Dynamically generate and display the waveform of an MP3
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class WaveformViewer extends javax.swing.JDialog {
 

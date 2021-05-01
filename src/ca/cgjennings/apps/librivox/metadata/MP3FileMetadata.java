@@ -37,7 +37,7 @@ import org.jaudiotagger.tag.id3.valuepair.GenreTypes;
  * A class that encapsulates basic metadata about an MP3 file. Most of the data
  * is obtained from ID3 tags, where available.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 3.0
  */
 public class MP3FileMetadata {

@@ -10,7 +10,7 @@ import org.jaudiotagger.tag.id3.ID3v24Tag;
  * This is the implementation of MetadataView used internally by
  * {@link MP3FileMetadata} as an adapter for tags from the Jaudiotagger library.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 class ViewImpl implements MetadataView {

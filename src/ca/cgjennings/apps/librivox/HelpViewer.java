@@ -28,7 +28,7 @@ import javax.swing.text.html.StyleSheet;
  * Dialog window that displays built-in help files and opens external links in
  * the system browser.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class HelpViewer extends javax.swing.JDialog {
 

@@ -9,7 +9,7 @@ import ca.cgjennings.util.Settings;
 /**
  * Validates and gathers information from the MP3 header.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class HeaderValidator extends AbstractValidator {
 

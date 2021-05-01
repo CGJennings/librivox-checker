@@ -20,7 +20,7 @@ import javax.swing.UIManager;
  * <p>
  * <b>Note:</b> This version hacked up to remove code not needed for Checker.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class PlatformSupport {
 

@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * A validator for details about the file as a filesystem object (file name,
  * etc.).
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class FileValidator extends AbstractValidator {
 

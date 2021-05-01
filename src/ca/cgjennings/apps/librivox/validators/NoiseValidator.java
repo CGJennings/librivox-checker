@@ -9,7 +9,7 @@ import static ca.cgjennings.apps.librivox.Checker.string;
 /**
  * Measures background noise by capturing the quietest part of the audio.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.92
  */
 public class NoiseValidator extends AbstractValidator {

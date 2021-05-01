@@ -16,7 +16,7 @@ import java.util.Iterator;
  * methods in that class. An exception to this would be a validator that
  * validates in multiple categories.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class Report {
 

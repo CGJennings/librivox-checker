@@ -5,7 +5,7 @@ import ca.cgjennings.apps.librivox.Checker;
 /**
  * Represents the frame header information in an MP3 stream.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public interface AudioHeader {

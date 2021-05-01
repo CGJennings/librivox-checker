@@ -22,7 +22,7 @@ import org.jaudiotagger.tag.id3.ID3v24Tag;
 /**
  * Upgrades old ID3 metadata to ID3v2 under user direction.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class ID3UpgradeTool {
 

@@ -11,7 +11,7 @@ import java.util.TreeSet;
  * A subclass of <code>java.util.Properties</code> that stores its entries in
  * sorted order.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class SortedProperties extends Properties {
 

@@ -23,7 +23,7 @@ import java.util.logging.Level;
  * <b>Note:</b> This package-private class is used internally
  * {@link LibriVoxAudioFile}. It is intended only for use by that class.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.3
  */
 class JobManager {

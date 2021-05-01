@@ -5,7 +5,7 @@ import javazoom.jl.decoder.Header;
 /**
  * An implementation of {@link AudioHeader} for the JavaLayer library.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 final class JavaLayerAudioHeader implements AudioHeader {

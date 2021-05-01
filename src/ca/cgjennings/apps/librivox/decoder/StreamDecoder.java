@@ -9,7 +9,7 @@ import java.io.IOException;
  * <p>
  * This interface insulates the application from whatever MP3 decoder is used.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public interface StreamDecoder {
 

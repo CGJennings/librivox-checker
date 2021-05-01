@@ -10,7 +10,7 @@ import ca.cgjennings.util.Settings;
  * A validator for the audio data: volume, sample rate, channel format, and so
  * on.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class AmplitudeValidator extends AbstractValidator {
 

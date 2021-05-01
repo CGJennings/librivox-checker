@@ -31,7 +31,7 @@ import java.util.logging.Level;
  * Represents an .mp3 file to be validated, and controls the stages of the
  * validation process.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class LibriVoxAudioFile {
 

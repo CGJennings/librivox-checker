@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * Structures a collection of {@link LibriVoxAudioFile} objects for display in a
  * <code>JTable</code>.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 class FileTableModel extends AbstractTableModel {
 

@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  * large version of the cover art thumbnail when the user clicks this in the
  * information report.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  * @since 0.91
  */
 public class MetadataEditorLinkFactory {

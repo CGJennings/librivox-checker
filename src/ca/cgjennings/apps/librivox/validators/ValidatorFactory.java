@@ -18,7 +18,7 @@ import java.util.List;
  * {@link LibriVoxAudioFile}. The validators to be used are determined by
  * parsing the <tt>resources/validator_classes</tt> file.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Christopher G. Jennings https://cgjennings.ca/contact/
  */
 public class ValidatorFactory {
 
