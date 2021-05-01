@@ -138,25 +138,22 @@ public class LibriVoxAudioFile {
             throw new IllegalStateException("must be called from dispatch thread");
         }
         cancelAnalysis(true);
-        Runnable job = new Runnable() {
-            @Override
-            public void run() {
-                boolean ok;
-                if ((taskFlags & WORKER_TASK_DOWNLOAD) != 0) {
-                    setStatus(Status.DOWNLOADING);
-                    ok = download();
-                    if (!ok || Thread.interrupted()) {
-                        return;
-                    }
+        Runnable job = () -> {
+            boolean ok;
+            if ((taskFlags & WORKER_TASK_DOWNLOAD) != 0) {
+                setStatus(Status.DOWNLOADING);
+                ok = download();
+                if (!ok || Thread.interrupted()) {
+                    return;
                 }
-                if ((taskFlags & WORKER_TASK_ANALYZE) != 0) {
-                    ok = analyze();
-                    if (!ok || Thread.interrupted()) {
-                        return;
-                    }
-                }
-                // ... additional tasks
             }
+            if ((taskFlags & WORKER_TASK_ANALYZE) != 0) {
+                ok = analyze();
+                if (!ok || Thread.interrupted()) {
+                    return;
+                }
+            }
+            // ... additional tasks
         };
         report = new Report(this);
         jobToken = JobManager.analyzeInFuture(this, job);
@@ -634,12 +631,9 @@ public class LibriVoxAudioFile {
      */
     private void fireProgressUpdate() {
         if (owner != null) {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (owner != null) {
-                        owner.progressUpdate(LibriVoxAudioFile.this);
-                    }
+            EventQueue.invokeLater(() -> {
+                if (owner != null) {
+                    owner.progressUpdate(LibriVoxAudioFile.this);
                 }
             });
         }

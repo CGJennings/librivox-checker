@@ -31,17 +31,14 @@ class ChooseValidatorDialog extends javax.swing.JDialog {
         getRootPane().setDefaultButton(okBtn);
         PlatformSupport.correctOKCancelOrder(okBtn, cancelBtn);
 
-        ActionListener validatorForcingFn = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int i = 0;
-                for (; i < boxes.length; ++i) {
-                    if (boxes[i].isSelected()) {
-                        break;
-                    }
+        ActionListener validatorForcingFn = (ActionEvent e) -> {
+            int i = 0;
+            for (; i < boxes.length; ++i) {
+                if (boxes[i].isSelected()) {
+                    break;
                 }
-                PlatformSupport.getOK(okBtn, cancelBtn).setEnabled(i < boxes.length);
             }
+            PlatformSupport.getOK(okBtn, cancelBtn).setEnabled(i < boxes.length);
         };
 
         exemplars = ValidatorFactory.getFactory().createAllValidators();
