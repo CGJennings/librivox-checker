@@ -352,7 +352,7 @@ public class Settings {
      *
      * @param key the settings key with the desired value
      * @param defaultValue the default to use if <code>key</code> is undefined
-     * @return an integer derived from the value of <code>key</code>, or
+     * @return an integer parsed from the value of <code>key</code>, or
      * <code>defaultValue</code>
      */
     public int getInt(String key, int defaultValue) {
@@ -386,6 +386,39 @@ public class Settings {
      * @param value the value to set for <code>key</code>
      */
     public void setInt(String key, int value) {
+        set(key, String.valueOf(value));
+    }
+
+    /**
+     * Parse a long integer from the value of <code>key</code>. If the setting is
+     * undefined, <code>defaultValue</code> is returned.
+     *
+     * @param key the settings key with the desired value
+     * @param defaultValue the default to use if <code>key</code> is undefined
+     * @return a long parsed from the value of <code>key</code>, or
+     * <code>defaultValue</code>
+     */
+    public long getLong(String key, long defaultValue) {
+        long value = defaultValue;
+        String v = get(key);
+        if (v != null) {
+            try {
+                value = Long.parseLong(v);
+            } catch (NumberFormatException e) {
+                warning("unable to parse: " + v);
+                // will return default
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Set the value of a {@code long} setting key.
+     *
+     * @param key the name of the key to set
+     * @param value the value to set for <code>key</code>
+     */
+    public void setLong(String key, long value) {
         set(key, String.valueOf(value));
     }
 

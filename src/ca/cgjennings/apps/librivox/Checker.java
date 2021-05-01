@@ -29,6 +29,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -287,6 +289,8 @@ public final class Checker extends javax.swing.JFrame {
         helpMenu = new javax.swing.JMenu();
         helpItem = new javax.swing.JMenuItem();
         quickStartItem = new javax.swing.JMenuItem();
+        updateSeparator = new javax.swing.JPopupMenu.Separator();
+        updateCheckItem = new javax.swing.JMenuItem();
         aboutSeparator = new javax.swing.JPopupMenu.Separator();
         aboutItem = new javax.swing.JMenuItem();
 
@@ -526,6 +530,15 @@ public final class Checker extends javax.swing.JFrame {
             }
         });
         helpMenu.add(quickStartItem);
+        helpMenu.add(updateSeparator);
+
+        updateCheckItem.setText("update-check");
+        updateCheckItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCheckItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(updateCheckItem);
         helpMenu.add(aboutSeparator);
 
         aboutItem.setText("about");
@@ -838,6 +851,10 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
 	}//GEN-LAST:event_id3EditItemActionPerformed
 
+    private void updateCheckItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCheckItemActionPerformed
+        checkForAppUpdate(false);
+    }//GEN-LAST:event_updateCheckItemActionPerformed
+
     private void copyReport(int index) {
         infoTab.setSelectedIndex(index);
         JEditorPane ed = index == 0 ? validationEditor : informationEditor;
@@ -1091,6 +1108,8 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JMenu strictnessMenu;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JMenu toolMenu;
+    private javax.swing.JMenuItem updateCheckItem;
+    private javax.swing.JPopupMenu.Separator updateSeparator;
     private javax.swing.JMenuItem upgradeTagItem;
     private javax.swing.JEditorPane validationEditor;
     private javax.swing.JMenuItem viewWaveformItem;
@@ -1294,6 +1313,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 x += dx;
                 if (x <= x2) {
                     ((Timer) e.getSource()).stop();
+                    checkForAppUpdateOnceAMonth();
                 }
                 if (!isVisible()) {
                     setVisible(true);
@@ -1485,4 +1505,66 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
         flushSettings();
     }
+
+    /**
+     * Check online if a new release is available.
+     *
+     * @param silentUnlessUpdateAvailable if true, the result of the check
+     *   is only reported if an update is available
+     */
+    private void checkForAppUpdate(final boolean silentUnlessUpdateAvailable) {
+        new Thread(()->{
+            final int result = UpdateCheck.checkForUpdate();
+            EventQueue.invokeLater(()->{
+                getSettings().setLong(PREF_LAST_UPDATE_CHECK, System.currentTimeMillis());
+
+                if(result <= 0 && silentUnlessUpdateAvailable) {
+                    return;
+                }
+
+                if(result == 1) {
+                    Object[] options = new Object[] { string("close"), string("update-download") };
+                    if(!Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                        options = new Object[] { options[0] };
+                    }
+                    final int choice = JOptionPane.showOptionDialog(
+                            Checker.this, string("update-available"),
+                            getTitle(), JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null, options, options[options.length-1]
+                    );
+                    if(choice == 1) {
+                        try {
+                            Desktop.getDesktop().browse(new URI(DOWNLOAD_PAGE));
+                        } catch (IOException | URISyntaxException ex) {
+                            Logger.getLogger(Checker.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else {
+                    final String messageKey = result == 0 ? "update-unavailable" : "update-error";
+                    final int messageType = result == 0 ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE;
+                    JOptionPane.showMessageDialog(
+                            Checker.this, string(messageKey),
+                            getTitle(), messageType
+                    );
+                }
+            });
+        }, "Update check").start();
+    }
+
+    /**
+     * Checks if an update is available if it has been 30 days since the
+     * last check.
+     */
+    private void checkForAppUpdateOnceAMonth() {
+        long now = System.currentTimeMillis();
+        long lastCheck = getSettings().getLong(PREF_LAST_UPDATE_CHECK, 0L);
+        if(lastCheck != 0L && (now - lastCheck) >= ONE_MONTH) {
+            getLogger().info("starting monthly update check");
+            checkForAppUpdate(true);
+        }
+    }
+
+    private static final long ONE_MONTH = 2592000000L;
+    private static final String PREF_LAST_UPDATE_CHECK = "last-update-check";
+    private static final String DOWNLOAD_PAGE = "https://cgjennings.ca/projects/checker/#download";
 }

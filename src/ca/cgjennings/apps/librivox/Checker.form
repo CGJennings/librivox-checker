@@ -226,6 +226,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quickStartItemActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="updateSeparator">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="updateCheckItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="update-check"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateCheckItemActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="aboutSeparator">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="aboutItem">
