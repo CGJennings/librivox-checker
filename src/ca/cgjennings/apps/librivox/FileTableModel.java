@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 class FileTableModel extends AbstractTableModel {
 
     public FileTableModel() {
-        rows = new ArrayList<LibriVoxAudioFile>();
+        rows = new ArrayList<>();
     }
 
     public int addAudioFile(LibriVoxAudioFile af) {

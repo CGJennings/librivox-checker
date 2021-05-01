@@ -1306,7 +1306,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private static final int INITIAL_WINDOW_POSITION_MARGIN = 32;
 
     private void initAppIcons() {
-        final List<Image> icons = new LinkedList<Image>();
+        final List<Image> icons = new LinkedList<>();
         final String[] iconFiles = new String[]{
             "pass@4x", "pass@2x", "pass"
         };
