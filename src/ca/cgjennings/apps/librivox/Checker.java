@@ -1013,6 +1013,21 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             initLookAndFeel();
             mainApp = new Checker();
             MetadataEditorLinkFactory.setEditorParentFrame(mainApp);
+            
+            // if files/URLs were passed on the command line,
+            // try to add them for checking
+            for (String f : args) {
+                try {
+                    if (f.startsWith("-")) continue;                
+                    if (f.startsWith("file:") || f.startsWith("http:")) {
+                        mainApp.checkURL(new URL(f));
+                    } else {
+                        mainApp.checkFile(new File(f));
+                    }
+                } catch (MalformedURLException ex) {
+                    getLogger().warning("unable to check supplied file: " + f + '(' + ex.getLocalizedMessage() + ')');
+                }
+            }
         });
     }
 
