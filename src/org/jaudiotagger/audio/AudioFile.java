@@ -21,6 +21,7 @@ package org.jaudiotagger.audio;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jaudiotagger.audio.exceptions.CannotWriteException;
@@ -177,11 +178,11 @@ public class AudioFile
     {
         RandomAccessFile newFile;
 
-        logger.info("Reading file:" + "path" + file.getPath() + ":abs:" + file.getAbsolutePath());
+        logger.log(Level.INFO, "Reading file: path {0} ({1})", new Object[]{file.getPath(), file.getAbsolutePath()});
         if (file.exists() == false)
         {
-            logger.severe("Unable to find:" + file.getPath());
-            throw new FileNotFoundException("Unable to find:" + file.getPath());
+            logger.log(Level.SEVERE, "Unable to find: {0}", file.getPath());
+            throw new FileNotFoundException("Unable to find: " + file.getPath());
         }
 
         // Unless opened as readonly the file must be writable
@@ -193,7 +194,7 @@ public class AudioFile
         {
             if (file.canWrite() == false)
             {
-                logger.severe("Unable to write:" + file.getPath());
+                logger.log(Level.SEVERE, "Unable to write: {0}", file.getPath());
                 throw new ReadOnlyFileException("Unable to write to:" + file.getPath());
             }
             newFile = new RandomAccessFile(file, "rw");
