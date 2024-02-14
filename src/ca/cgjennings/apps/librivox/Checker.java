@@ -81,7 +81,7 @@ public final class Checker extends javax.swing.JFrame {
     /**
      * Current version number.
      */
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
 
     /**
      * Creates a new Checker application instance.
@@ -1019,7 +1019,7 @@ private void strictItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             for (String f : args) {
                 try {
                     if (f.startsWith("-")) continue;                
-                    if (f.startsWith("file:") || f.startsWith("http:")) {
+                    if (f.startsWith("file:") || f.startsWith("http:") || f.startsWith("https:")) {
                         mainApp.checkURL(new URL(f));
                     } else {
                         mainApp.checkFile(new File(f));
